@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Recipe } from "../recipes/recipes.model";
+import { RecipeService } from '../recipes/recipes.service';
+
 
 //import { SessionService } from 'src/app/core/services/session.service';
 
@@ -11,12 +14,13 @@ import { Router } from '@angular/router';
 })
 
 export class LandingComponent implements OnInit {
-  private roles: string[] = [];
+  private recipesUrl = 'api/recipes/';
+  recipes!: Recipe[];
   isLoggedIn: boolean = false;
   username!: string;
 
   constructor(
-    //private session: SessionService,
+    private recipeService: RecipeService,
     private router: Router
   ) { }
 
@@ -29,6 +33,11 @@ export class LandingComponent implements OnInit {
 //
     //  this.username = user.username;
     //}
+    this.getProducts();
+  }
+
+  private getProducts() {
+    this.recipeService.getRecipes().subscribe((recipes) => this.recipes = recipes);
   }
 
   logout(): void {

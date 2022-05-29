@@ -32,14 +32,14 @@
   	      <strong>CajunCookbook</strong>
   	    </span>
   	  </span>
-	  <div class="user-dropdown" ngbDropdown display="dynamic">
-  	  <i class="far fa-user" ngbDropdownToggle></i>
-	    <div ngbDropdownMenu>
-	  	  <button [routerLink]="['/signup']" ngbDropdownItem>Sign Up</button>
-	  	  <button [routerLink]="['/login']" ngbDropdownItem>Log In</button>
-	  	  <button [routerLink]="['/profile']" ngbDropdownItem>Profile</button>
-	    </div>
-	  </div>
+      <div class="dropdown">
+        <i class="far fa-user"data-bs-toggle="dropdown"></i>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a [routerLink]="['/signup']" class="dropdown-item" href="#">Sign Up</a></li>
+          <li><a [routerLink]="['/login']" class="dropdown-item" href="#">Login</a></li>
+          <li><a [routerLink]="['/profile']" class="dropdown-item" href="#">Profile</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
