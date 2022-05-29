@@ -12,7 +12,7 @@ import { Recipe } from './recipes.model';
 
 export class RecipeService {
 
-  private recipesURl = 'https://ancient-caverns-44011.herokuapp.com/recipes';
+  private recipesURl = environment.API_URL;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,10 +23,10 @@ export class RecipeService {
   /** GET heroes from the server */
   getRecipes(): Observable<Recipe[]> {
     console.log(this.recipesURl)
-    return this.http.get<Recipe[]>(this.recipesURl)
+    return this.http.get<Recipe[]>(`${this.recipesURl}/recipes`)
       .pipe(
-        tap(_ => this.log('fetched heroes')),
-        catchError(this.handleError<Recipe[]>('getHeroes', []))
+        tap(_ => this.log('fetched recipes')),
+        catchError(this.handleError<Recipe[]>('getRecipes', []))
       );
   }
 
