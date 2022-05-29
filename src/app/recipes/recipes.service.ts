@@ -1,40 +1,123 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+
+import { environment } from 'src/environments/environment';
 import { Recipe } from './recipes.model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-@Injectable({
-  providedIn: 'root'
-})
+
+
+@Injectable({ providedIn: 'root' })
+
 export class RecipeService {
-  private recipesUrl = 'api/recipes/';
+
+  private recipesURl = 'https://ancient-caverns-44011.herokuapp.com/recipes';
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   constructor(private http: HttpClient) { }
 
+  /** GET heroes from the server */
   getRecipes(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(this.recipesUrl).pipe(
-      retry(2),
-      catchError((error: HttpErrorResponse) => {
-        console.error(error);
-        return throwError(error);
-      })
+    console.log(this.recipesURl)
+    return this.http.get<Recipe[]>(this.recipesURl)
+      .pipe(
+        tap(_ => this.log('fetched heroes')),
+        catchError(this.handleError<Recipe[]>('getHeroes', []))
+      );
+  }
+
+  /** GET Recipe by id. Return `undefined` when id not found */
+  getRecipeNo404<Data>(id: number): Observable<Recipe> {
+    const url = `${this.recipesURl}/?id=${id}`;
+    return this.http.get<Recipe[]>(url)
+      .pipe(
+        map(heroes => heroes[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? 'fetched' : 'did not find';
+          this.log(`${outcome} hero id=${id}`);
+        }),
+        catchError(this.handleError<Recipe>(`getRecipe id=${id}`))
+      );
+  }
+
+  /** GET Recipe by id. Will 404 if id not found */
+  getRecipe(id: number): Observable<Recipe> {
+    const url = `${this.recipesURl}/${id}`;
+    return this.http.get<Recipe>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Recipe>(`getRecipe id=${id}`))
     );
   }
 
-  createRecipe(recipes: Recipe): Observable<Recipe> {
-    recipes.id = null;
-    return this.http.post<Recipe>(this.recipesUrl, recipes).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error(error);
-        return throwError(error);
-      })
-    )
+  /* GET Recipes whose name contains search term */
+  searchRecipes(term: string): Observable<Recipe[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<Recipe[]>(`${this.recipesURl}/?name=${term}`).pipe(
+      tap(x => x.length ?
+         this.log(`found Recipes matching "${term}"`) :
+         this.log(`no Recipes matching "${term}"`)),
+      catchError(this.handleError<Recipe[]>('searchRecipes', []))
+    );
   }
 
-  editRecipe(recipes: Recipe): Observable<any> {
-    return this.http.put(this.recipesUrl + recipes.id, recipes);
+  //////// Save methods //////////
+
+  /** POST: add a new Recipe to the server */
+  addRecipe(recipe: Recipe): Observable<Recipe> {
+    return this.http.post<Recipe>(this.recipesURl, recipe, this.httpOptions).pipe(
+      tap((newRecipe: Recipe) => this.log(`added Recipe w/ id=${newRecipe.id}`)),
+      catchError(this.handleError<Recipe>('addRecipe'))
+    );
   }
 
-  deleteRecipe(id: number): Observable<any> {
-    return this.http.delete(this.recipesUrl + id);
+  /** DELETE: delete the Recipe from the server */
+  deleteHero(id: number): Observable<Recipe> {
+    const url = `${this.recipesURl}/${id}`;
+
+    return this.http.delete<Recipe>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted Recipe id=${id}`)),
+      catchError(this.handleError<Recipe>('deleteHero'))
+    );
+  }
+
+  /** PUT: update the Recipe on the server */
+  updateHero(recipe: Recipe): Observable<any> {
+    return this.http.put(this.recipesURl, recipe, this.httpOptions).pipe(
+      tap(_ => this.log(`updated Recipe id=${recipe.id}`)),
+      catchError(this.handleError<any>('updateRecipe'))
+    );
+  }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   *
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  /** Log a RecipeService message with the MessageService */
+  private log(message: string) {
+    console.log(`RecipeService: ${message}`);
   }
 }

@@ -8,9 +8,6 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { DataService } from './data.service';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +17,6 @@ import { DataService } from './data.service';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    HttpClientInMemoryWebApiModule.forRoot(DataService),
     HttpClientModule,
   ],
   providers: [],

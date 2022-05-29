@@ -14,8 +14,7 @@ import { RecipeService } from '../recipes/recipes.service';
 })
 
 export class LandingComponent implements OnInit {
-  private recipesUrl = 'api/recipes/';
-  recipes!: Recipe[];
+  recipes!: any;
   isLoggedIn: boolean = false;
   username!: string;
 
