@@ -1,0 +1,21 @@
+.navbar-component {
+  color: white;
+
+  .logo {
+    cursor: pointer;
+    padding-left: 20px;
+    i {
+      padding-right: 5px;
+    }
+  }
+
+  .user-dropdown {
+    i {
+      font-size: 25px;  
+    }
+    .dropdown-toggle::after {
+      display:none;
+    }
+  }
+
+}

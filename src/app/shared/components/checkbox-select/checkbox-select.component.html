@@ -1,0 +1,24 @@
+<div class="checkbox-select-component">
+  <span class="search-container">
+    <text-filter
+      (onChange)="search($event)">
+    </text-filter>
+  </span>
+  <li (click)="toggleAll()">
+    <a class="dropdown-item">
+      <i [ngClass]="collection.allSelected && 'glyphicon-check' || 'glyphicon-unchecked'"></i>
+      <span><em class="text-muted" translate>{{label}}</em></span>
+    </a>
+  </li>
+  <li class="dropdown-divider"></li>
+  <li *ngFor="let record of collection.records; trackBy:trackByFn"
+    (click)="set(record)">
+    <a class="dropdown-item">
+      <span>
+        <i [ngClass]="record.$selected && 'glyphicon-check' || 'glyphicon-unchecked'"></i>
+      </span>
+      <span translate>{{record[key]}}</span>
+    </a>
+  </li>
+  <li class="dropdown-divider"></li>
+</div>

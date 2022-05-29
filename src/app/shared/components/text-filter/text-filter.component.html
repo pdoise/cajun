@@ -1,0 +1,10 @@
+<div class="form-group position-relative">
+  <input
+    autocomplete="off"
+    type="text"
+    id="search-input"
+    class="form-control"
+    [(ngModel)]="text"
+    (ngModelChange)="change()"
+    placeholder="{{placeholder || 'Search'}}">
+</div>

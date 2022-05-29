@@ -1,0 +1,45 @@
+<div class="navbar-component">
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+  	<div class="row">
+  	  <div class="col-sm-8 col-md-7 py-4">
+  		<h4>About</h4>
+  		<p>Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+  	  </div>
+  	  <div class="col-sm-4 offset-md-1 py-4">
+  		<h4>Contact</h4>
+  		<ul class="list-unstyled">
+  		  <li><a href="#">Follow on Twitter</a></li>
+  		  <li><a href="#">Like on Facebook</a></li>
+  		  <li><a href="#">Email me</a></li>
+  		</ul>
+  	  </div>
+  	</div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+  	  <span>
+  	    <button
+  	      class="navbar-toggler"
+  	      type="button"
+  	      data-bs-toggle="collapse"
+  	      data-bs-target="#navbarHeader">
+  	      <span class="navbar-toggler-icon"></span>
+  	    </button>
+  	    <span class="logo" [routerLink]="['/landing']">
+  	      <i class="fas fa-book"></i>
+  	      <strong>CajunCookbook</strong>
+  	    </span>
+  	  </span>
+	  <div class="user-dropdown" ngbDropdown display="dynamic">
+  	  <i class="far fa-user" ngbDropdownToggle></i>
+	    <div ngbDropdownMenu>
+	  	  <button [routerLink]="['/signup']" ngbDropdownItem>Sign Up</button>
+	  	  <button [routerLink]="['/login']" ngbDropdownItem>Log In</button>
+	  	  <button [routerLink]="['/profile']" ngbDropdownItem>Profile</button>
+	    </div>
+	  </div>
+    </div>
+  </div>
+</div>
