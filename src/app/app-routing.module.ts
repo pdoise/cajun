@@ -4,8 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { LandingResolver } from './landing/landing.resolver';
 
-import { RecipeComponent } from './recipes/show/recipes-show.component';
-import { RecipeResolver } from './recipes/show/recipes-show.resolver';
+import { RecipeShowComponent } from './recipes/show/recipes-show.component';
+import { RecipeFormComponent } from './recipes/form/recipes-form.component';
+import { RecipeShowResolver } from './recipes/show/recipes-show.resolver';
 
 const routes: Routes = [{
   path: 'landing',
@@ -13,8 +14,12 @@ const routes: Routes = [{
   resolve: { recipes: LandingResolver }
 },{
   path: 'recipe/:id',
-  component: RecipeComponent,
-  resolve: { recipe: RecipeResolver }
+  component: RecipeShowComponent,
+  resolve: { recipe: RecipeShowResolver }
+},{
+  path: 'recipe/:id/edit',
+  component: RecipeFormComponent,
+  resolve: { recipe: RecipeShowResolver }
 },{
   path: '',
   redirectTo: 'landing',

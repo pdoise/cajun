@@ -1,0 +1,44 @@
+<app-primary-layout>
+  <form>
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input type="text"
+        name="name"
+        [(ngModel)]="recipe.name"
+        class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <input type="text"
+        name="description"
+        [(ngModel)]="recipe.description"
+        [maxlength]="100"
+        class="form-control">
+      <div class="form-text">Write a small description of what this recipe is, its origin, or what it means to you.</div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Ingredients</label>
+      <textarea type="text"
+        name="ingredients"
+        [(ngModel)]="recipe.ingredients"
+        [maxlength]="5000"
+        class="form-control"
+        rows="10">
+      </textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Directions</label>
+      <textarea type="text"
+        name="directions"
+        [(ngModel)]="recipe.directions"
+        [maxlength]="5000"
+        class="form-control"
+        rows="10">
+      </textarea>
+    </div>
+    <button class="btn btn-primary"
+      (click)="saveRecipe()">Submit
+    </button>
+  </form>
+  <!--<pre>{{recipe|json}}</pre>-->
+</app-primary-layout>

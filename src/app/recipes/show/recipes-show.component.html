@@ -1,36 +1,35 @@
 <app-primary-layout>
-  <div class="card shadow-sm h-100">
-    <div class="card-header">
+  <div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="card-title">{{recipe.name}}</h5>
+      <button type="button"
+        class="btn btn-outline-secondary"
+        (click)="goEditRecipe()">
+        Edit Recipe
+      </button>
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="recipe-img-col pb-3">
-          <img *ngIf="recipe.imgSrc" class="recipe-img" [src]="recipe.imgSrc">
-          <img *ngIf="!recipe.imgSrc" class="recipe-img" src="/assets/images/no-image.png">
-          <p class="card-text">{{recipe.description}}</p>
-        </div>
-        <div class="col">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="container pb-3">
-                <h5>Ingredients:</h5>
-                <pre [innerHtml]="recipe.ingredients"></pre>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="container pb-3">
-                <h5>Directions:</h5>
-                <pre [innerHtml]="recipe.directions"></pre>
-              </div>
-            </div>
+        <div class="col-sm-12 col-md-12 col-lg-4 card-row">
+          <div class="recipe-img-container">
+            <img *ngIf="recipe.imgSrc" class="recipe-img" [src]="recipe.imgSrc">
+            <img *ngIf="!recipe.imgSrc" class="recipe-img" src="/assets/images/no-image.png">
           </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4 card-row">
+          <h5>Ingredients:</h5>
+          <p [innerHtml]="recipe.ingredients"></p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4 card-row">
+          <h5>Directions:</h5>
+          <p [innerHtml]="recipe.directions"></p>
         </div>
       </div>
     </div>
     <div class="card-footer">
       <div class="d-flex justify-content-between align-items-center">
         <small class="text-muted">Contributor: {{recipe.user.username}}</small>
+        <p class="card-text">{{recipe.description}}</p>
       </div>
    </div>
   </div>

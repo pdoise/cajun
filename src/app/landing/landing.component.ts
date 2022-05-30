@@ -34,7 +34,7 @@ export class LandingComponent implements OnInit {
   }
 
   goRecipe(recipe: Recipe): void {
-    this.router.navigate(['/recipe', recipe.id]);
+    this.router.navigate([`/recipe/${recipe.id}`]);
   }
 
   logout(): void {

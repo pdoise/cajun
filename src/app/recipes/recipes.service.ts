@@ -77,18 +77,16 @@ export class RecipeService {
   }
 
   /** DELETE: delete the Recipe from the server */
-  deleteHero(id: number): Observable<Recipe> {
-    const url = `${this.recipesURl}/${id}`;
-
-    return this.http.delete<Recipe>(url, this.httpOptions).pipe(
+  deleteRecipe(id: number): Observable<Recipe> {
+    return this.http.delete<Recipe>(`${this.recipesURl}/${id}`, this.httpOptions).pipe(
       tap(_ => this.log(`deleted Recipe id=${id}`)),
-      catchError(this.handleError<Recipe>('deleteHero'))
+      catchError(this.handleError<Recipe>('deleteRecipe'))
     );
   }
 
   /** PUT: update the Recipe on the server */
-  updateHero(recipe: Recipe): Observable<any> {
-    return this.http.put(this.recipesURl, recipe, this.httpOptions).pipe(
+  updateRecipe(recipe: Recipe): Observable<any> {
+    return this.http.put(`${this.recipesURl}/${recipe.id}`, recipe, this.httpOptions).pipe(
       tap(_ => this.log(`updated Recipe id=${recipe.id}`)),
       catchError(this.handleError<any>('updateRecipe'))
     );

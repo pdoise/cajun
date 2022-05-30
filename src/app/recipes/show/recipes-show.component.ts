@@ -8,7 +8,7 @@ import { Recipe } from 'src/app/shared/shared.models';
     styleUrls: ['./recipes-show.component.scss']
 })
 
-export class RecipeComponent implements OnInit {
+export class RecipeShowComponent implements OnInit {
   recipe!: Recipe;
 
   constructor(
@@ -18,6 +18,10 @@ export class RecipeComponent implements OnInit {
 
   ngOnInit(): void {
     this.recipe = this.route.snapshot.data['recipe'];
+  }
+
+  goEditRecipe(): void {
+    this.router.navigate([`recipe/${this.recipe.id}/edit`]);
   }
 
 }

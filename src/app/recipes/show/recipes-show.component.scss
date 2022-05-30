@@ -1,12 +1,15 @@
-.recipe-img-col {
-  width: 300px;
+.recipe-img-container {
+  overflow: hidden;
 }
 
 .recipe-img {
-  height: 250px;
-  width: 300px;
+  width: 100%;
 }
 
-pre {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+.card-row {
+  padding: 20px;
+}
+
+p {
+  white-space: pre-wrap;
 }
