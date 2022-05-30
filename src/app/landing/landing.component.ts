@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from "@angular/router";
 
-import { Recipe } from "../recipes/recipes.model";
-import { RecipeService } from '../recipes/recipes.service';
-
+import { Recipe } from 'src/app/shared/shared.models';
 
 //import { SessionService } from 'src/app/core/services/session.service';
 
@@ -14,16 +12,17 @@ import { RecipeService } from '../recipes/recipes.service';
 })
 
 export class LandingComponent implements OnInit {
-  recipes!: any;
-  isLoggedIn: boolean = false;
-  username!: string;
+  recipes!: Recipe[];
+  //isLoggedIn: boolean = false;
+  //username!: string;
 
   constructor(
-    private recipeService: RecipeService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.recipes = this.route.snapshot.data['recipes'];
     //console.log(this.session)
     //this.isLoggedIn = !!this.session.valid;
 //
@@ -32,11 +31,10 @@ export class LandingComponent implements OnInit {
 //
     //  this.username = user.username;
     //}
-    this.getProducts();
   }
 
-  private getProducts() {
-    this.recipeService.getRecipes().subscribe((recipes) => this.recipes = recipes);
+  goRecipe(recipe: Recipe): void {
+    this.router.navigate(['/recipe', recipe.id]);
   }
 
   logout(): void {

@@ -7,11 +7,13 @@ import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
+import { RecipeComponent } from './recipes/show/recipes-show.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent
+    LandingComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,

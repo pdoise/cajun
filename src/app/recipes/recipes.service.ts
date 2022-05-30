@@ -5,14 +5,14 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Recipe } from './recipes.model';
+import { Recipe } from 'src/app/shared/shared.models';
 
 
 @Injectable({ providedIn: 'root' })
 
 export class RecipeService {
 
-  private recipesURl = environment.API_URL;
+  private recipesURl = environment.API_URL + '/recipes';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,8 +22,7 @@ export class RecipeService {
 
   /** GET heroes from the server */
   getRecipes(): Observable<Recipe[]> {
-    console.log(this.recipesURl)
-    return this.http.get<Recipe[]>(`${this.recipesURl}/recipes`)
+    return this.http.get<Recipe[]>(`${this.recipesURl}`)
       .pipe(
         tap(_ => this.log('fetched recipes')),
         catchError(this.handleError<Recipe[]>('getRecipes', []))
@@ -48,7 +47,7 @@ export class RecipeService {
   getRecipe(id: number): Observable<Recipe> {
     const url = `${this.recipesURl}/${id}`;
     return this.http.get<Recipe>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
+      tap(_ => this.log(`fetched recipe id=${id}`)),
       catchError(this.handleError<Recipe>(`getRecipe id=${id}`))
     );
   }
