@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 
 import { Recipe } from 'src/app/shared/shared.models';
+import { SearchFilterPipe } from 'src/app/shared/pipes/search-filter.pipe';
 
 //import { SessionService } from 'src/app/core/services/session.service';
 
@@ -13,6 +14,8 @@ import { Recipe } from 'src/app/shared/shared.models';
 
 export class LandingComponent implements OnInit {
   recipes!: Recipe[];
+  allRecipes!: Recipe[];
+  textSearch: string = '';
   //isLoggedIn: boolean = false;
   //username!: string;
 
@@ -23,6 +26,7 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.recipes = this.route.snapshot.data['recipes'];
+    this.allRecipes = this.recipes;
     //console.log(this.session)
     //this.isLoggedIn = !!this.session.valid;
 //
@@ -31,6 +35,21 @@ export class LandingComponent implements OnInit {
 //
     //  this.username = user.username;
     //}
+  }
+
+  search(text: string): void {
+    this.textSearch = text;
+    this.applyFilters();
+  }
+
+  applyFilters(): void {
+    let filtered = this.allRecipes || [];
+    filtered = new SearchFilterPipe().transform(this.textSearch, filtered);
+    this.recipes = filtered;
+  }
+
+  goAddRecipe(): void {
+    this.router.navigate([`recipe/new`]);
   }
 
   goRecipe(recipe: Recipe): void {

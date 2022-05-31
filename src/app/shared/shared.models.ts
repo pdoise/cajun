@@ -1,18 +1,18 @@
-export interface Recipe {
-  id: number | null;
-  name: string;
-  description: string;
-  ingredients: string;
-  directions: string;
-  imgSrc: string | null;
-  cookTime: number;
-  user: User;
+export class Recipe {
+  id!: number | null;
+  name!: string;
+  description!: string;
+  ingredients!: string;
+  directions!: string;
+  img_src!: string | null;
+  cook_time!: number | null;
+  user!: User;
 }
 
-export interface User {
-  id: number | null;
-  username: string;
-  email: string;
+export class User {
+  id!: number | null;
+  username!: string;
+  email!: string;
   avatar?: string | null;
   bio?: number;
 }

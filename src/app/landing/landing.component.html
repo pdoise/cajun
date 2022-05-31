@@ -3,19 +3,24 @@
     <div class="row py-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">CajunCookbook</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
+        <p class="lead text-muted">Louisiana’s Best Recipes-Cajun, Creole, and Southern</p>
+        <app-text-filter
+          placeholder="Search Recipes"
+          [text]="textSearch"
+          (onChange)="search($event)">
+        </app-text-filter>
+        <button class="btn btn-primary mt-3"
+          (click)="goAddRecipe()">
+          Add New Recipe
+        </button>
       </div>
     </div>
   </section>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
     <div class="col" class="py-5 bg-light" *ngFor="let recipe of recipes">
       <div class="card shadow-sm h-100" (click)="goRecipe(recipe)">
-        <img *ngIf="recipe.imgSrc" class="card-img-top" [src]="recipe.imgSrc">
-        <img *ngIf="!recipe.imgSrc" class="card-img-top" src="/assets/images/no-image.png">
+        <img *ngIf="recipe.img_src" class="card-img-top" [src]="recipe.img_src">
+        <img *ngIf="!recipe.img_src" class="card-img-top" src="/assets/images/no-image.png">
         <div class="card-body">
           <h5 class="card-title">{{recipe.name}}</h5>
           <p class="card-text">{{recipe.description}}</p>

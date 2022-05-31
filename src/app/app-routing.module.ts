@@ -13,6 +13,9 @@ const routes: Routes = [{
   component: LandingComponent,
   resolve: { recipes: LandingResolver }
 },{
+  path: 'recipe/new',
+  component: RecipeFormComponent
+},{
   path: 'recipe/:id',
   component: RecipeShowComponent,
   resolve: { recipe: RecipeShowResolver }

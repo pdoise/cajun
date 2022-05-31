@@ -11,6 +11,7 @@ import { RecipeService } from "../../recipes/recipes.service";
 
 export class RecipeFormComponent implements OnInit {
   recipe!: Recipe;
+  isEdit!: boolean;
 
   constructor(
     private router: Router,
@@ -19,12 +20,30 @@ export class RecipeFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.recipe = this.route.snapshot.data['recipe'];
+    if (this.route.snapshot.data['recipe']) {
+      this.recipe = this.route.snapshot.data['recipe'];
+      this.isEdit = true;
+    } else {
+      this.recipe = {} as Recipe;
+    }
   }
 
   saveRecipe(): void {
+    if (this.isEdit) {
+      this.updateRecipe();
+    } else {
+      this.addRecipe();
+    }
+  }
+
+  addRecipe(): void {
+    this.recipeService.addRecipe(this.recipe).subscribe(()=>{
+      this.router.navigate([`landing`]);
+    });
+  }
+
+  updateRecipe(): void {
     this.recipeService.updateRecipe(this.recipe).subscribe(()=>{
-      console.log('hi')
       this.router.navigate([`recipe/${this.recipe.id}`]);
     });
   }

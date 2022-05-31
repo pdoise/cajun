@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'text-filter',
+  selector: 'app-text-filter',
   templateUrl: './text-filter.component.html',
   styleUrls: ['./text-filter.component.scss']
 })
