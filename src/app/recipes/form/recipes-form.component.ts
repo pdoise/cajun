@@ -28,6 +28,14 @@ export class RecipeFormComponent implements OnInit {
     }
   }
 
+  setImage(file: any): void {
+    console.log(file)
+    this.recipe.image = file
+    this.recipeService.updateRecipe(this.recipe).subscribe(()=>{
+      //this.router.navigate([`recipe/${this.recipe.id}`]);
+    });
+  }
+
   saveRecipe(): void {
     if (this.isEdit) {
       this.updateRecipe();

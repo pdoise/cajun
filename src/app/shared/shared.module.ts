@@ -8,6 +8,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { PrimaryLayoutComponent } from './layout/primary-layout/primary-layout.component';
 
 import { CheckboxSelectComponent } from './components/checkbox-select/checkbox-select.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { TextFilterComponent } from './components/text-filter/text-filter.component';
 
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
@@ -15,6 +16,7 @@ import { WhitelistKeysPipe } from './pipes/whitelist-keys.pipe';
 
 const components = [
   CheckboxSelectComponent,
+  FileUploadComponent,
   NavbarComponent,
   FooterComponent,
   PrimaryLayoutComponent,

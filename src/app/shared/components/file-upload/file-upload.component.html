@@ -1,0 +1,21 @@
+
+<div class="mb-3">
+  <label for="formFile" class="form-label">
+    <div class="mb-3">
+      <ng-content></ng-content>
+    </div>
+    <div class="input-group mb-3">
+      <input (change)="this.onFilechange($event)"
+        class="form-control"
+        type="file"
+        id="formFile">
+      <button (click)="this.upload()"
+        class="btn btn-primary input-group-text"
+        for="formFile"
+        [disabled]="!file">
+        Upload
+      </button>
+    </div>
+  </label>
+</div>
+  <!-- <i class="fas fa-camera"></i> -->

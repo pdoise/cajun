@@ -1,5 +1,13 @@
 <app-primary-layout>
   <form>
+    <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
+      <label class="form-label">Photo</label>
+      <app-file-upload [itemId]="recipe">
+        <div class="recipe-img-container">
+          <img *ngIf="!recipe.image" class="recipe-img border" src="/assets/images/no-image.png">
+        </div>
+      </app-file-upload>
+    </div>
     <div class="mb-3">
       <label class="form-label">Name</label>
       <input type="text"
@@ -40,5 +48,5 @@
       (click)="saveRecipe()">Submit
     </button>
   </form>
-  <!-- <pre>{{recipe|json}}</pre> -->
+  <pre>{{recipe|json}}</pre>
 </app-primary-layout>
