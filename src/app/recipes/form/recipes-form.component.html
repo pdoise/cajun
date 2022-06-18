@@ -2,9 +2,9 @@
   <form>
     <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
       <label class="form-label">Photo</label>
-      <app-file-upload [itemId]="recipe">
+      <app-file-upload (setImage)="setImage($event)">
         <div class="recipe-img-container">
-          <img *ngIf="!recipe.image" class="recipe-img border" src="/assets/images/no-image.png">
+          <img *ngIf="!recipe.image" class="recipe-img border" [src]="imageUrl">
         </div>
       </app-file-upload>
     </div>

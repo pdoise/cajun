@@ -1,7 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-file-upload',
@@ -12,11 +9,9 @@ import { environment } from 'src/environments/environment';
 export class FileUploadComponent implements OnInit {
   @Input() itemId!: any;
   file!: File;
-  private formData = new FormData();
-  private apiUrl = environment.API_URL;
   @Output() private setImage = new EventEmitter<any>();
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   ngOnInit(): void {
 
@@ -28,13 +23,9 @@ export class FileUploadComponent implements OnInit {
 
   upload() {
     let formParams = new FormData();
-    formParams.append('image', this.file)
-    console.log(formParams)
-    this.itemId.image = formParams
-    //this.setImage.emit(formParams);
-    this.http.put(`${this.apiUrl}/recipes/${this.itemId.id}`, this.itemId).subscribe((response) => {
-      console.log(response)
-    });
+    formParams.append(this.file.name, this.file)
+    console.log(this.file)
+    this.setImage.emit(formParams);
   }
 
 }
