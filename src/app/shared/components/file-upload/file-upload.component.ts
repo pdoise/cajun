@@ -9,6 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class FileUploadComponent implements OnInit {
   @Input() itemId!: any;
   file!: File;
+  private formData = new FormData();
   @Output() private setImage = new EventEmitter<any>();
 
   constructor() { }
@@ -18,14 +19,15 @@ export class FileUploadComponent implements OnInit {
   }
 
   onFilechange(event: any) {
-    this.file = event.target.files[0]
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+      this.file = fileList[0];
+      this.formData.append('image', this.file, this.file.name);
+    }
   }
 
   upload() {
-    let formParams = new FormData();
-    formParams.append(this.file.name, this.file)
-    console.log(this.file)
-    this.setImage.emit(formParams);
+    this.setImage.emit(this.formData);
   }
 
 }

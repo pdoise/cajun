@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Recipe } from 'src/app/shared/shared.models';
 import { RecipeService } from "../../recipes/recipes.service";
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,6 +16,9 @@ export class RecipeFormComponent implements OnInit {
   recipe!: Recipe;
   isEdit!: boolean;
   imageUrl: string = '';
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data' })
+  };
 
   private recipesURl = environment.API_URL + '/recipes';
 
@@ -40,14 +43,17 @@ export class RecipeFormComponent implements OnInit {
   }
 
   setImage(file: any): void {
-    console.log(file)
+    file['filename'] = file.name;
     this.recipe['image'] = file;
-    this.http.put(`${this.recipesURl}/${this.recipe.id}`, this.recipe).subscribe((response) => {
+    if (file instanceof Blob) {
+      console.log('its a blob')
+    }
+    this.http.put(`${this.recipesURl}/${this.recipe.id}/image`, file).subscribe((response) => {
       console.log(response)
     });
-   // this.recipeService.updateRecipe(file).subscribe(()=>{
-   //   //this.router.navigate([`recipe/${this.recipe.id}`]);
-   // });
+    //this.recipeService.updateRecipe(file).subscribe(()=>{
+    //  //this.router.navigate([`recipe/${this.recipe.id}`]);
+    //});
   }
 
   saveRecipe(): void {
