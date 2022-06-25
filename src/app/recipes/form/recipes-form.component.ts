@@ -48,7 +48,7 @@ export class RecipeFormComponent implements OnInit {
     if (file instanceof Blob) {
       console.log('its a blob')
     }
-    this.http.put(`${this.recipesURl}/${this.recipe.id}/image`, file).subscribe((response) => {
+    this.http.put(`${this.recipesURl}/${this.recipe.id}/image`, file, { responseType: 'text' }).subscribe((response) => {
       console.log(response)
     });
     //this.recipeService.updateRecipe(file).subscribe(()=>{
