@@ -29,6 +29,7 @@ export class RecipeFormComponent implements OnInit {
   }
 
   saveRecipe(): void {
+    this.recipe.user_id = 1;
     if (this.isEdit) {
       this.updateRecipe();
     } else {

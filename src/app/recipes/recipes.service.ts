@@ -20,13 +20,8 @@ export class RecipeService {
 
   constructor(private http: HttpClient) { }
 
-  /** GET heroes from the server */
   getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(`${this.recipesURl}`)
-      .pipe(
-        tap(_ => this.log('fetched recipes')),
-        catchError(this.handleError<Recipe[]>('getRecipes', []))
-      );
   }
 
   /** GET Recipe by id. Return `undefined` when id not found */
