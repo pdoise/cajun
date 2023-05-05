@@ -9,6 +9,7 @@ export class Recipe {
   user!: User;
   user_id!: number;
   image!: any;
+  image_url!: string;
 }
 
 export class User {
