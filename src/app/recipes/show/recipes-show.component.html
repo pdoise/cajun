@@ -1,5 +1,7 @@
 <app-primary-layout>
-  <div class="card shadow-sm">
+  <h1>{{ recipe.name }}</h1>
+<img [src]="imageSrc" *ngIf="imageSrc">
+  <!-- <div class="card shadow-sm">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="card-title">{{recipe.name}}</h5>
       <button type="button"
@@ -32,6 +34,6 @@
         <p class="card-text">{{recipe.description}}</p>
       </div>
    </div>
-  </div>
+  </div> -->
   <!--<pre>{{recipe|json}}</pre>-->
 </app-primary-layout>

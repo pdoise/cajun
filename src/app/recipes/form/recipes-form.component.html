@@ -1,4 +1,17 @@
 <app-primary-layout>
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">name</label>
+      <input type="text" class="form-control" id="name" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input type="file" class="form-control-file" id="image" (change)="onFileSelected($event)">
+
+    </div>
+    <button type="submit" class="btn btn-primary">Create Recipe</button>
+  </form>
+
   <form>
     <div class="mb-3">
       <label class="form-label">Name</label>
