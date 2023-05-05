@@ -19,7 +19,7 @@ export class RecipeShowComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.recipe = this.route.snapshot.data['recipe'].recipe;
+    this.recipe = this.route.snapshot.data['recipe'];
     console.log(this.recipe)
     if (this.route.snapshot.data['recipe'].image) {
       this.image = this.route.snapshot.data['recipe'].image;
