@@ -64,8 +64,7 @@ export class RecipeService {
   //////// Save methods //////////
 
   /** POST: add a new Recipe to the server */
-  addRecipe(recipe: Recipe): Observable<Recipe> {
-    console.log(recipe)
+  addRecipe(recipe: any): Observable<Recipe> {
     return this.http.post<Recipe>(this.recipesURl, recipe, this.httpOptions).pipe(
       tap((newRecipe: Recipe) => this.log(`added Recipe w/ id=${newRecipe.id}`)),
       catchError(this.handleError<Recipe>('addRecipe'))

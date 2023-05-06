@@ -1,49 +1,40 @@
 <app-primary-layout>
-  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="title">name</label>
-      <input type="text" class="form-control" id="name" formControlName="name">
+  <form [formGroup]="recipeForm">
+    <div class="form-group" class="mb-3">
+      <label class="form-label" for="image">Image</label>
+      <input class="form-control" type="file" class="form-control-file" id="image" (change)="onFileSelected($event)">
     </div>
-    <div class="form-group">
-      <label for="image">Image</label>
-      <input type="file" class="form-control-file" id="image" (change)="onFileSelected($event)">
-
-    </div>
-    <button type="submit" class="btn btn-primary">Create Recipe</button>
-  </form>
-
-  <form>
-    <div class="mb-3">
+    <div class="form-group" class="mb-3">
       <label class="form-label">Name</label>
       <input type="text"
         name="name"
-        [(ngModel)]="recipe.name"
+        formControlName="name"
         class="form-control">
     </div>
-    <div class="mb-3">
+    <div class="form-group" class="mb-3">
       <label class="form-label">Description</label>
       <input type="text"
         name="description"
-        [(ngModel)]="recipe.description"
+        formControlName="description"
         [maxlength]="100"
         class="form-control">
       <div class="form-text">Write a small description of what this recipe is, its origin, or what it means to you.</div>
     </div>
-    <div class="mb-3">
+    <div class="form-group" class="mb-3">
       <label class="form-label">Ingredients</label>
       <textarea type="text"
         name="ingredients"
-        [(ngModel)]="recipe.ingredients"
+        formControlName="ingredients"
         [maxlength]="5000"
         class="form-control"
         rows="10">
       </textarea>
     </div>
-    <div class="mb-3">
+    <div class="form-group" class="mb-3">
       <label class="form-label">Directions</label>
       <textarea type="text"
         name="directions"
-        [(ngModel)]="recipe.directions"
+        formControlName="directions"
         [maxlength]="5000"
         class="form-control"
         rows="10">

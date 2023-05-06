@@ -27,6 +27,11 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
     this.recipes = this.route.snapshot.data['recipes'];
     this.allRecipes = this.recipes;
+    this.allRecipes.forEach((recipe) => {
+      if (recipe.image) {
+        recipe.img_src = `data:${recipe.image?.content_type};base64,${recipe.image?.data}`;
+      }
+    })
     //console.log(this.session)
     //this.isLoggedIn = !!this.session.valid;
 //

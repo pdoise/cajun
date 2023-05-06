@@ -11,7 +11,6 @@ import { Recipe } from 'src/app/shared/shared.models';
 export class RecipeShowComponent implements OnInit {
   recipe!: Recipe;
   image!: any;
-  imageSrc!: string;
 
   constructor(
     private router: Router,
@@ -20,10 +19,9 @@ export class RecipeShowComponent implements OnInit {
 
   ngOnInit(): void {
     this.recipe = this.route.snapshot.data['recipe'];
-    console.log(this.recipe)
-    if (this.route.snapshot.data['recipe'].image) {
-      this.image = this.route.snapshot.data['recipe'].image;
-      this.imageSrc = `data:${this.image?.content_type};base64,${this.image?.data}`;
+    if (this.recipe.image) {
+      this.image = this.recipe.image;
+      this.recipe.img_src = `data:${this.recipe.image?.content_type};base64,${this.recipe.image?.data}`;
     }
 
   }
