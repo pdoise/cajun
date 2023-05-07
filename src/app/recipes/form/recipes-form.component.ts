@@ -3,12 +3,12 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { RecipeActions } from '../../state/app.actions';
 import { selectRecipe } from '../../state/app.selector';
-import { Recipe } from 'src/app/models/app.models';
+import { Recipe } from 'src/app/app.models';
 
 import { environment } from 'src/environments/environment';
 
@@ -36,21 +36,22 @@ export class RecipeFormComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(RecipeActions.getRecipe({recipeId: this.route.snapshot.params['id']}));
 
-    this.recipe$.subscribe((recipe) => {
+    //TODO: unsubscribe
+    //firstValueFrom(this.recipe$).then((recipe) => {
+      this.recipe$.subscribe((recipe) => {
       if (recipe.id) {
         this.isEdit = true;
         this.recipe = recipe;
       }
+      this.form = this.formBuilder.group({
+        id: [this.recipe.id || null],
+        name: [this.recipe.name || ''],
+        description: [this.recipe.description || ''],
+        ingredients: [this.recipe.ingredients || ''],
+        directions: [this.recipe.directions || ''],
+        user_id: 1
+      });
     })
-
-    this.form = this.formBuilder.group({
-      id: [this.recipe.id || null],
-      name: [this.recipe.name || ''],
-      description: [this.recipe.description || ''],
-      ingredients: [this.recipe.ingredients || ''],
-      directions: [this.recipe.directions || ''],
-      user_id: 1
-    });
   }
 
   onFileSelected(event: any) {
@@ -80,6 +81,10 @@ export class RecipeFormComponent implements OnInit {
     //} else {
     //  this.store.dispatch(RecipeActions.createRecipe({ recipe: formData }));
     //}
+  }
+
+  cancel() {
+    this.router.navigate([`recipe/${this.recipe.id}`]);
   }
 
 }

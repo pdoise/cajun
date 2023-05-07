@@ -1,6 +1,6 @@
 import { createActionGroup, props, emptyProps } from '@ngrx/store';
 
-import { Recipe } from '../models/app.models';
+import { Recipe } from '../app.models';
 
 export const AppAuth = createActionGroup({
   source: '[App Auth]',
@@ -34,13 +34,13 @@ export const RecipeActions = createActionGroup({
     'Get Recipe': props<{ recipeId: number }>(),
     'Get Recipe Success': props<{ recipe: Recipe }>(),
 
-    'Update Recipe': props<{ recipe: FormData, recipeId: number | null }>(),
+    'Update Recipe': props<{ recipe: Recipe, recipeId: number | null }>(),
     'Update Pnp Success': props<{ recipe: Recipe }>(),
 
     'Get Updated Recipe': props<{ recipe: Recipe }>(),
     'Get Updated Recipe Success': props<{ recipe: Recipe }>(),
 
-    'Create Recipe': props<{ recipe: FormData }>(),
+    'Create Recipe': props<{ recipe: Recipe }>(),
     'Create Recipe Success': props<{ recipe: Recipe }>(),
 
     'Delete Recipe': props<{ recipeId: number }>(),

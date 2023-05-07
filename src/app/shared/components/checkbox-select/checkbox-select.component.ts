@@ -18,7 +18,6 @@ export class CheckboxSelectComponent implements OnInit {
   public textSearch!: string;
 
   ngOnInit() {
-    console.log(this.collection);
     this.all = { ...this.collection };
   }
 

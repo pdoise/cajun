@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { RecipeActions } from '../state/app.actions';
 import { selectRecipes } from '../state/app.selector';
-import { Recipe } from 'src/app/models/app.models';
+import { Recipe } from 'src/app/app.models';
 import { SearchFilterPipe } from 'src/app/shared/pipes/search-filter.pipe';
 
 //import { SessionService } from 'src/app/core/services/session.service';

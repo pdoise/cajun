@@ -22,7 +22,7 @@ import { RecipeFormComponent } from './recipes/form/recipes-form.component';
     AppComponent,
     LandingComponent,
     RecipeShowComponent,
-    RecipeFormComponent
+    RecipeFormComponent,
   ],
   imports: [
     FormsModule,

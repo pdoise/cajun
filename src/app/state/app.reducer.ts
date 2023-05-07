@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { Action } from '@ngrx/store';
 
-import { Recipe } from '../models/app.models';
+import { Recipe } from '../app.models';
 import { RecipeActions } from './app.actions';
 
 export interface AppState {
@@ -42,7 +42,6 @@ export const appReducer = createReducer(
     });
     return { ...state, recipes: updatedRecipes };
   }),
-  // @ts-ignore
   on(RecipeActions.createRecipe, (state, { recipe }) => {
     return {...state, recipes: [...state.recipes, recipe]};
   }),

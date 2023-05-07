@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Recipe } from 'src/app/models/app.models';
+import { Recipe } from 'src/app/app.models';
 
 
 @Injectable({ providedIn: 'root' })
@@ -16,6 +16,10 @@ export class RecipeService {
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  foo = {
+    headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data' })
   };
 
   constructor(private http: HttpClient) { }
@@ -80,11 +84,15 @@ export class RecipeService {
   }
 
   /** PUT: update the Recipe on the server */
-  updateRecipe(recipe: Recipe): Observable<any> {
-    return this.http.put(`${this.recipesURl}/${recipe.id}`, recipe, this.httpOptions).pipe(
-      tap(_ => this.log(`updated Recipe id=${recipe.id}`)),
-      catchError(this.handleError<any>('updateRecipe'))
-    );
+  //updateRecipe(recipe: Recipe): Observable<any> {
+  //  return this.http.put(`${this.recipesURl}/${recipe.id}`, recipe, this.httpOptions).pipe(
+  //    tap(_ => this.log(`updated Recipe id=${recipe.id}`)),
+  //    catchError(this.handleError<any>('updateRecipe'))
+  //  );
+  //}
+
+  updateRecipe(formData: FormData, recipeId: number | null): Observable<any> {
+    return this.http.put(this.recipesURl + `/${recipeId}`, formData, this.foo)
   }
 
   /**

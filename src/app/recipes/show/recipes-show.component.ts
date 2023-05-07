@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { RecipeActions } from '../../state/app.actions';
 import { selectRecipe } from '../../state/app.selector';
-import { Recipe } from 'src/app/models/app.models';
+import { Recipe } from 'src/app/app.models';
 
 @Component({
     templateUrl: './recipes-show.component.html',
@@ -14,7 +14,7 @@ import { Recipe } from 'src/app/models/app.models';
 
 export class RecipeShowComponent implements OnInit {
   recipe$: Observable<Recipe> = this.store.select(selectRecipe);
-  id: number = this.route.snapshot.params['id']
+  id: number = this.route.snapshot.params['id'];
 
   constructor(
     private store: Store,

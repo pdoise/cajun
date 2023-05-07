@@ -5,7 +5,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { Recipe } from '../models/app.models';
+import { Recipe } from '../app.models';
 import { RecipeActions } from './app.actions';
 
 import { environment } from 'src/environments/environment';

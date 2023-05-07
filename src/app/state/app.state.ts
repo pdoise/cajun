@@ -1,4 +1,4 @@
-import { Recipe } from '../models/app.models';
+import { Recipe } from '../app.models';
 
 export interface RecipeState {
   recipes: Recipe[];

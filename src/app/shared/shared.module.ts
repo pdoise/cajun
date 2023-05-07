@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { PrimaryLayoutComponent } from './layout/primary-layout/primary-layout.component';
+import { TrowserLayoutComponent } from './layout/trowser-layout/trowser-layout.component';
 
 import { CheckboxSelectComponent } from './components/checkbox-select/checkbox-select.component';
 import { TextFilterComponent } from './components/text-filter/text-filter.component';
@@ -18,6 +19,7 @@ const components = [
   NavbarComponent,
   FooterComponent,
   PrimaryLayoutComponent,
+  TrowserLayoutComponent,
   TextFilterComponent
 ]
 
