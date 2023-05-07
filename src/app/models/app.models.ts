@@ -5,6 +5,7 @@ export class Recipe {
   ingredients!: string;
   directions!: string;
   img_src!: string | null;
+  imgsrc!: string | null;
   cook_time!: number | null;
   user!: User;
   user_id!: number;

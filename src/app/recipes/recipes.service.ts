@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { Recipe } from 'src/app/shared/shared.models';
+import { Recipe } from 'src/app/models/app.models';
 
 
 @Injectable({ providedIn: 'root' })

@@ -1,1 +1,87 @@
 /* You can add global styles to this file, and also import other style files */
+
+.app-primary {
+  color: #B83621;
+}
+
+// Bootstrap overrides
+
+.navbar {
+  background-color: #B83621;
+}
+
+.collapse {
+  background-color: #F8F9FA;
+  border: none;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  margin: 0;
+  padding: 1rem;
+  color: black;
+}
+
+.navbar-toggler {
+  color: white !important;
+}
+
+.navbar-toggler-icon {
+  filter: invert(1) !important;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  box-shadow: none;
+}
+
+.card-header {
+  background-color: #B83621;
+  color: white;
+}
+
+.card-footer {
+  background-color: #B83621;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #B83621;
+  border-color: #B83621;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(to bottom, #B83621, #A62F1C);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .btn-primary.dropdown-toggle {
+  background-color: #A62F1C;
+  border-color: #A62F1C;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.open > .btn-primary.dropdown-toggle {
+  background-image: none;
+}
+
+.btn-primary:focus {
+  outline: 0;
+  box-shadow: 0px 0px 5px 3px rgba(184, 54, 33, 0.4);
+}
+
+
+// Crawfish Red: #B83621
+// This rich red-orange color is reminiscent of crawfish, a staple ingredient in many Cajun dishes.
+
+// Cajun Brown: #7E5B3E
+// This warm brown color evokes the earthy flavors of Cajun spices like paprika, cayenne, and chili powder.
+
+// Bayou Green: #2B6D4F
+// This deep green color represents the lush vegetation and swamps of Louisiana, as well as the fresh herbs and vegetables used in Cajun cooking.
+
+// Mardi Gras Purple: #5C2D91
+// This vibrant purple color is associated with the festive spirit and cultural diversity of Louisiana, particularly during Mardi Gras season.
+
+// Creole Yellow: #F5DA81
+// This bright yellow color represents the sunny and vibrant Creole cuisine, which has a distinct influence on Cajun cooking.

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
-import { Recipe } from 'src/app/shared/shared.models';
+import { RecipeActions } from '../../state/app.actions';
+import { selectRecipe } from '../../state/app.selector';
+import { Recipe } from 'src/app/models/app.models';
 
 @Component({
     templateUrl: './recipes-show.component.html',
@@ -9,25 +13,21 @@ import { Recipe } from 'src/app/shared/shared.models';
 })
 
 export class RecipeShowComponent implements OnInit {
-  recipe!: Recipe;
-  image!: any;
+  recipe$: Observable<Recipe> = this.store.select(selectRecipe);
+  id: number = this.route.snapshot.params['id']
 
   constructor(
+    private store: Store,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.recipe = this.route.snapshot.data['recipe'];
-    if (this.recipe.image) {
-      this.image = this.recipe.image;
-      this.recipe.img_src = `data:${this.recipe.image?.content_type};base64,${this.recipe.image?.data}`;
-    }
-
+    this.store.dispatch(RecipeActions.getRecipe({recipeId: this.route.snapshot.params['id']}));
   }
 
   goEditRecipe(): void {
-    this.router.navigate([`recipe/${this.recipe.id}/edit`]);
+    this.router.navigate([`recipe/${this.id}/edit`]);
   }
 
 }

@@ -7,3 +7,17 @@
   width: auto;
 }
 
+.square-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding-top: 100%; /* The aspect ratio of a square is 1:1, so this sets the height to be equal to the width */
+}
+
+.square-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Scales the image while maintaining its aspect ratio to completely cover the element's content box */
+}

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
-import { Recipe } from 'src/app/shared/shared.models';
+import { RecipeActions } from '../state/app.actions';
+import { selectRecipes } from '../state/app.selector';
+import { Recipe } from 'src/app/models/app.models';
 import { SearchFilterPipe } from 'src/app/shared/pipes/search-filter.pipe';
 
 //import { SessionService } from 'src/app/core/services/session.service';
@@ -13,26 +17,20 @@ import { SearchFilterPipe } from 'src/app/shared/pipes/search-filter.pipe';
 })
 
 export class LandingComponent implements OnInit {
-  recipes!: Recipe[];
-  allRecipes!: Recipe[];
+  recipes$: Observable<Recipe[]> = this.store.select(selectRecipes);
   textSearch: string = '';
   //isLoggedIn: boolean = false;
   //username!: string;
 
   constructor(
+    private store: Store,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.recipes = this.route.snapshot.data['recipes'];
-    this.allRecipes = this.recipes;
-    this.allRecipes.forEach((recipe) => {
-      if (recipe.image) {
-        recipe.img_src = `data:${recipe.image?.content_type};base64,${recipe.image?.data}`;
-      }
-    })
-    //console.log(this.session)
+    this.store.dispatch(RecipeActions.getRecipes());
+
     //this.isLoggedIn = !!this.session.valid;
 //
     //if (this.isLoggedIn) {
@@ -48,9 +46,9 @@ export class LandingComponent implements OnInit {
   }
 
   applyFilters(): void {
-    let filtered = this.allRecipes || [];
-    filtered = new SearchFilterPipe().transform(this.textSearch, filtered);
-    this.recipes = filtered;
+   //let filtered = this.allRecipes || [];
+   //filtered = new SearchFilterPipe().transform(this.textSearch, filtered);
+   //this.recipes = filtered;
   }
 
   goAddRecipe(): void {

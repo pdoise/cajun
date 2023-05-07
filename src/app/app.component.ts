@@ -1,16 +1,19 @@
-import { Component, OnInit, isDevMode } from '@angular/core';
+import { Component, OnInit, OnDestroy, isDevMode } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from "@angular/router";
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'cajun';
   isLoader!: boolean;
+  private storeSub!: Subscription;
 
-  constructor(private router: Router) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit() {
     if (isDevMode()) {
@@ -18,6 +21,14 @@ export class AppComponent implements OnInit {
     } else {
       console.log('Production!');
     }
+    // Cache store
+    this.store.subscribe((store) => {
+      console.log(store)
+    })
+  }
+
+  ngOnDestroy() {
+    if (this.storeSub) { this.storeSub.unsubscribe(); }
   }
 
   routerEvents() {
@@ -34,4 +45,5 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
 }

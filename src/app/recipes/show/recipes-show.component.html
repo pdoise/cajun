@@ -1,9 +1,9 @@
 <app-primary-layout>
   <div class="card shadow-sm">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h5 class="card-title">{{recipe.name}}</h5>
+      <h5 class="card-title">{{(recipe$|async)?.name}}</h5>
       <button type="button"
-        class="btn btn-outline-secondary"
+        class="btn btn-outline-light"
         (click)="goEditRecipe()">
         Edit Recipe
       </button>
@@ -12,26 +12,25 @@
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-4 card-row">
           <div class="recipe-img-container">
-            <img *ngIf="recipe.img_src" class="recipe-img" [src]="recipe.img_src">
-            <img *ngIf="!recipe.img_src" class="recipe-img" src="/assets/images/no-image.png">
+            <img *ngIf="(recipe$|async)?.img_src" class="recipe-img" [src]="(recipe$|async)?.img_src">
+            <img *ngIf="!(recipe$|async)?.img_src" class="recipe-img" src="/assets/images/no-image.png">
           </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 card-row">
           <h5>Ingredients:</h5>
-          <p [innerHtml]="recipe.ingredients"></p>
+          <p [innerHtml]="(recipe$|async)?.ingredients"></p>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 card-row">
           <h5>Directions:</h5>
-          <p [innerHtml]="recipe.directions"></p>
+          <p [innerHtml]="(recipe$|async)?.directions"></p>
         </div>
       </div>
     </div>
     <div class="card-footer">
       <div class="d-flex justify-content-between align-items-center">
-        <small class="text-muted">Contributor: {{recipe.user.username}}</small>
-        <p class="card-text">{{recipe.description}}</p>
+        <small>Contributor: {{(recipe$|async)?.user?.username}}</small>
+        <p class="card-text">{{(recipe$|async)?.description}}</p>
       </div>
    </div>
   </div>
-  <pre>{{recipe|json}}</pre>
 </app-primary-layout>
