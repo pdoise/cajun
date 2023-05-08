@@ -1,19 +1,24 @@
 import { createReducer, on } from '@ngrx/store';
 import { Action } from '@ngrx/store';
 
+import { AppState } from './app.state';
 import { Recipe } from '../app.models';
-import { RecipeActions } from './app.actions';
-
-export interface AppState {
-  recipes: Recipe[];
-}
+import { AppFiltering, RecipeActions } from './app.actions';
 
 export const initialState: AppState = {
-  recipes: []
+  recipes: [],
+  recipe: {} as Recipe,
+  sort: { key: '', dir: '' },
+  search: ''
 };
 
 export const appReducer = createReducer(
   initialState,
+  on(AppFiltering.search, (state, { text }) => {
+    let search = state.search;
+    search = text;
+    return { ...state, search: search };
+  }),
   // Recipes
   on(RecipeActions.getRecipe, (state, { recipeId }) => {
     let recipe: Recipe = state.recipes.filter((r: any) => { return r.id == recipeId })[0] || {} as Recipe;

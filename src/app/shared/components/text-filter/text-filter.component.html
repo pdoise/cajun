@@ -1,10 +1,21 @@
-<div class="form-group position-relative">
-  <input
-    autocomplete="off"
-    type="text"
-    id="search-input"
-    class="form-control"
-    [(ngModel)]="text"
-    (ngModelChange)="change()"
-    placeholder="{{placeholder || 'Search'}}">
+<div class="text-filter">
+
+  <div class="form-group position-relative">
+    <input
+      autocomplete="off"
+      type="text"
+      id="search-input"
+      class="form-control mb-3 "
+      [(ngModel)]="text"
+      (ngModelChange)="change()"
+      placeholder="{{placeholder || 'Search'}}">
+
+    <span
+      [hidden]="!text"
+      class="form-control-feedback text-filter-clear"
+      (click)="clear()">
+        <i class="cancel mb-1 fa fa-times"></i>
+      </span>
+  </div>
+
 </div>

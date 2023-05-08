@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { RecipeActions } from '../../state/app.actions';
 import { selectRecipe } from '../../state/app.selector';
 import { Recipe } from 'src/app/app.models';
-
-import { environment } from 'src/environments/environment';
 
 @Component({
   templateUrl: './recipes-form.component.html',
@@ -24,21 +21,19 @@ export class RecipeFormComponent implements OnInit {
   isEdit!: boolean;
   form!: FormGroup;
   image!: File;
-  private recipesURl = environment.API_URL + '/recipes';
+  private recipeSub!: Subscription;
 
   constructor(
     private store: Store,
-    private formBuilder: FormBuilder, private http: HttpClient,
+    private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.store.dispatch(RecipeActions.getRecipe({recipeId: this.route.snapshot.params['id']}));
 
-    //TODO: unsubscribe
-    //firstValueFrom(this.recipe$).then((recipe) => {
-      this.recipe$.subscribe((recipe) => {
+    this.recipeSub = this.recipe$.subscribe((recipe) => {
       if (recipe.id) {
         this.isEdit = true;
         this.recipe = recipe;
@@ -54,33 +49,16 @@ export class RecipeFormComponent implements OnInit {
     })
   }
 
-  onFileSelected(event: any) {
-    this.image = event.target.files[0];
+  ngOnDestroy() {
+    if (this.recipeSub) { this.recipeSub.unsubscribe(); }
   }
 
   saveRecipe(): void {
-    const formData = new FormData();
-    formData.append('recipe[name]', this.form.get('name')?.value);
-    formData.append('recipe[description]', this.form.get('description')?.value);
-    formData.append('recipe[ingredients]', this.form.get('ingredients')?.value);
-    formData.append('recipe[directions]', this.form.get('directions')?.value);
-    formData.append('recipe[user_id]', this.form.get('user_id')?.value);
-    if (this.image) { formData.append('recipe[image]', this.image);}
     if (this.isEdit) {
-      this.http.put(this.recipesURl + `/${this.recipe.id}`, formData).subscribe(response => {
-        this.router.navigate([`recipe/${this.recipe.id}`]);
-      })
+      this.store.dispatch(RecipeActions.updateRecipe({ recipe: this.form.getRawValue(), recipeId: this.recipe.id }));
     } else {
-      this.http.post(this.recipesURl, formData).subscribe(response => {
-        this.router.navigate([`landing`]);
-      })
+      this.store.dispatch(RecipeActions.createRecipe({ recipe: this.form.getRawValue() }));
     }
-    //TODO: formData and recipe types dont jive in reducer
-    //if (this.isEdit) {
-    //  this.store.dispatch(RecipeActions.updateRecipe({ recipe: formData, recipeId: this.recipe.id }));
-    //} else {
-    //  this.store.dispatch(RecipeActions.createRecipe({ recipe: formData }));
-    //}
   }
 
   cancel() {

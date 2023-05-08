@@ -1,4 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { AppFiltering } from 'src/app/state/app.actions';
 
 @Component({
   selector: 'app-text-filter',
@@ -11,18 +14,25 @@ export class TextFilterComponent {
   @Input() tooltip!: string;
   @Input() tooltipPlacement!: string;
   @Input() text!: string;
+  @Input() filterStore: boolean = true;
   @Output() onChange = new EventEmitter<any>();
 
-  emit() {
-    this.onChange.emit(this.text);
+  constructor(private store: Store) {}
+
+  set() {
+    if (this.filterStore) {
+      this.store.dispatch(AppFiltering.search({text: this.text}));
+    } else {
+      this.onChange.emit(this.text);
+    }
   };
 
   change() {
-    this.emit();
+    this.set();
   };
 
   clear() {
     this.text = '';
-    this.emit();
+    this.set();
   }
 }
