@@ -12,25 +12,53 @@
       </div>
     </div>
   </section>
-  <h3 class="fw-light app-primary">Featured Recipes</h3>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
-    <div class="col" class="py-5 bg-light" *ngFor="let recipe of (recipes$|async) | slice:0:8">
-      <div class="card shadow-sm h-100" (click)="goRecipe(recipe)">
-        <div class="square-image-wrapper">
-          <img *ngIf="recipe.img_src" class="card-img-top square-image" [src]="recipe.img_src">
-          <img *ngIf="!recipe.img_src" class="card-img-top square-image" src="/assets/images/no-image.png">
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{recipe.name}}</h5>
-          <p class="card-text">{{recipe.description}}</p>
-        </div>
-        <div class="card-footer">
-          <div class="d-flex justify-content-between align-items-center">
-            <small>Contributor: {{recipe.user.username}}</small>
+
+  <section *ngIf="!(recipes$|async)?.length" class="text-center">
+    <div class="spinner-grow">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </section>
+
+  <section *ngIf="(recipes$|async)?.length">
+    <h3 class="fw-light app-primary">Featured Recipes</h3>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
+      <div class="col" class="py-5 bg-light" *ngFor="let recipe of (recipes$|async) | slice:0:8">
+        <div class="card shadow-sm h-100" (click)="goRecipe(recipe)">
+          <div class="square-image-wrapper">
+            <img *ngIf="recipe.img_src" class="card-img-top square-image" [src]="recipe.img_src">
+            <img *ngIf="!recipe.img_src" class="card-img-top square-image" src="/assets/images/no-image.png">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{recipe.name}}</h5>
+            <p class="card-text">{{recipe.description}}</p>
+          </div>
+          <div class="card-footer">
+            <div class="d-flex justify-content-between align-items-center">
+              <small>Contributor: {{recipe.user.username}}</small>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!--<pre>{{recipes|json}}</pre>-->
+    <h3 class="fw-light app-primary mt-5">All Recipes</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Contributor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let recipe of (recipes$|async)" (click)="goRecipe(recipe)">
+          <td *ngIf="recipe.img_src"><img class="card-img-table" [src]="recipe.img_src"></td>
+          <td *ngIf="!recipe.img_src"><img class="card-img-table" src="/assets/images/no-image.png"></td>
+          <td>{{recipe.name}}</td>
+          <td>{{recipe.description}}</td>
+          <td>{{recipe.user.username}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 </app-primary-layout>
