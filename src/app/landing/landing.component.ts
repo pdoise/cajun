@@ -15,7 +15,8 @@ import { Recipe } from 'src/app/app.models';
 
 export class LandingComponent implements OnInit {
   recipes$: Observable<Recipe[]> = this.store.select(selectRecipes);
-  textSearch: string = '';
+  page: number = 1;
+  pageSize: number = 10;
 
   constructor(
     private store: Store,

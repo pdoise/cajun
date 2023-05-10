@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -29,6 +30,7 @@ import { RecipeFormComponent } from './recipes/form/recipes-form.component';
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
     SharedModule,
     HttpClientModule,
     StoreModule.forRoot({app: appReducer}),

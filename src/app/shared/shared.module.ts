@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -9,6 +10,7 @@ import { PrimaryLayoutComponent } from './layout/primary-layout/primary-layout.c
 import { TrowserLayoutComponent } from './layout/trowser-layout/trowser-layout.component';
 
 import { CheckboxSelectComponent } from './components/checkbox-select/checkbox-select.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 import { TextFilterComponent } from './components/text-filter/text-filter.component';
 
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
@@ -16,11 +18,12 @@ import { WhitelistKeysPipe } from './pipes/whitelist-keys.pipe';
 
 const components = [
   CheckboxSelectComponent,
+  PaginationComponent,
+  TextFilterComponent,
   NavbarComponent,
   FooterComponent,
   PrimaryLayoutComponent,
   TrowserLayoutComponent,
-  TextFilterComponent
 ]
 
 const pipes = [
@@ -32,7 +35,8 @@ const pipes = [
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   declarations: [
     components,

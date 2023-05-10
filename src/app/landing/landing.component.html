@@ -61,7 +61,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let recipe of (recipes$|async)" (click)="goRecipe(recipe)">
+          <tr *ngFor="let recipe of (recipes$|async) | slice: (page-1) * pageSize : page * pageSize;" (click)="goRecipe(recipe)">
             <td *ngIf="recipe.img_src"><img class="card-img-table" [src]="recipe.img_src"></td>
             <td *ngIf="!recipe.img_src"><img class="card-img-table" src="/assets/images/no-image.png"></td>
             <td>{{recipe.name}}</td>
@@ -70,6 +70,14 @@
           </tr>
         </tbody>
       </table>
+      <pagination
+        [records]="recipes$"
+        [filteredRecords]="recipes$"
+        label="Total Recipes"
+        [page]="page"
+        [pageSize]="pageSize"
+        (pageChanged)="page = $event">
+      </pagination>
     </div>
   </section>
 </app-primary-layout>
