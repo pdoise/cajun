@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { RecipeActions } from '../state/app.actions';
 import { selectRecipes } from '../state/app.selector';
 import { Recipe } from 'src/app/app.models';
-import { SearchFilterPipe } from 'src/app/shared/pipes/search-filter.pipe';
 
 //import { SessionService } from 'src/app/core/services/session.service';
 
@@ -30,6 +29,9 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(RecipeActions.getRecipes());
+    this.recipes$.subscribe((recipe) => {
+      console.log(recipe)
+    })
 
     //this.isLoggedIn = !!this.session.valid;
 //
@@ -38,11 +40,6 @@ export class LandingComponent implements OnInit {
 //
     //  this.username = user.username;
     //}
-  }
-
-  search(text: string): void {
-    this.textSearch = text;
-    this.applyFilters();
   }
 
   applyFilters(): void {

@@ -26,3 +26,7 @@
   height: 100%;
   object-fit: cover; /* Scales the image while maintaining its aspect ratio to completely cover the element's content box */
 }
+
+table {
+  vertical-align: middle;
+}

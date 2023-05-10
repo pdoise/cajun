@@ -7,7 +7,7 @@ export class Recipe {
   img_src!: string | null;
   imgsrc!: string | null;
   cook_time!: number | null;
-  user!: User;
+  user!: User | null;
   user_id!: number;
   image!: any;
   image_url!: string;

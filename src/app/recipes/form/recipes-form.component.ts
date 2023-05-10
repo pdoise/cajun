@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -31,16 +31,16 @@ export class RecipeFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(RecipeActions.getRecipe({recipeId: this.route.snapshot.params['id']}));
+    if (this.route.snapshot.params['id']) {
+      this.store.dispatch(RecipeActions.getRecipe({recipeId: this.route.snapshot.params['id']}));
+      this.isEdit = true;
+    }
 
     this.recipeSub = this.recipe$.subscribe((recipe) => {
-      if (recipe.id) {
-        this.isEdit = true;
-        this.recipe = recipe;
-      }
+      if (recipe.id) { this.recipe = recipe; }
       this.form = this.formBuilder.group({
         id: [this.recipe.id || null],
-        name: [this.recipe.name || ''],
+        name: [this.recipe.name || '', [Validators.required]],
         description: [this.recipe.description || ''],
         ingredients: [this.recipe.ingredients || ''],
         directions: [this.recipe.directions || ''],
@@ -62,7 +62,13 @@ export class RecipeFormComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate([`recipe/${this.recipe.id}`]);
+    if ( this.isEdit) {
+      this.router.navigate([`recipe/${this.recipe.id}`]);
+    } else {
+      this.router.navigate([`landing`]);
+    }
   }
+
+  get formInvalid(): boolean { return !!(this.form.invalid) }
 
 }

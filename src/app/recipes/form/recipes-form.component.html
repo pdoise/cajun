@@ -43,7 +43,8 @@
   </div>
   <div actions>
     <button class="btn btn-outline-light"
-      (click)="saveRecipe()">Submit
+      (click)="saveRecipe()"
+      [disabled]="formInvalid">Submit
     </button>
   </div>
 </app-trowser-layout>

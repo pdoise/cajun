@@ -41,6 +41,7 @@ export class RecipeShowComponent implements OnInit {
 
   saveRecipe(): void {
     const formData = new FormData();
+    formData.append('recipe[user_id]', '1');
     formData.append('recipe[image]', this.image);
     this.http.put(this.recipesURl + `/${this.id}`, formData).subscribe(response => {
       this.store.dispatch(RecipeActions.getRecipe({recipeId: this.route.snapshot.params['id']}));
