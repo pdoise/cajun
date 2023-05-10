@@ -40,7 +40,10 @@
         </div>
       </div>
     </div>
-    <!-- <h3 class="fw-light app-primary mt-5">All Recipes</h3>
+  </section>
+
+  <section *ngIf="(recipes$|async)?.length">
+    <h3 class="fw-light app-primary mt-5">All Recipes</h3>
     <div class="app-table">
       <table class="table table-hover">
         <colgroup>
@@ -64,10 +67,9 @@
             <td>{{recipe.name}}</td>
             <td>{{recipe.description}}</td>
             <td>{{recipe.user?.username}}</td>
-            <td>{{recipe}}</td>
           </tr>
         </tbody>
       </table>
-    </div> -->
+    </div>
   </section>
 </app-primary-layout>

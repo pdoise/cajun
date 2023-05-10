@@ -7,8 +7,6 @@ import { RecipeActions } from '../state/app.actions';
 import { selectRecipes } from '../state/app.selector';
 import { Recipe } from 'src/app/app.models';
 
-//import { SessionService } from 'src/app/core/services/session.service';
-
 @Component({
     selector: 'app-landing',
     templateUrl: './landing.component.html',
@@ -18,8 +16,6 @@ import { Recipe } from 'src/app/app.models';
 export class LandingComponent implements OnInit {
   recipes$: Observable<Recipe[]> = this.store.select(selectRecipes);
   textSearch: string = '';
-  //isLoggedIn: boolean = false;
-  //username!: string;
 
   constructor(
     private store: Store,
@@ -32,20 +28,6 @@ export class LandingComponent implements OnInit {
     this.recipes$.subscribe((recipe) => {
       console.log(recipe)
     })
-
-    //this.isLoggedIn = !!this.session.valid;
-//
-    //if (this.isLoggedIn) {
-    //  const user = this.session.user();
-//
-    //  this.username = user.username;
-    //}
-  }
-
-  applyFilters(): void {
-   //let filtered = this.allRecipes || [];
-   //filtered = new SearchFilterPipe().transform(this.textSearch, filtered);
-   //this.recipes = filtered;
   }
 
   goAddRecipe(): void {
@@ -54,11 +36,6 @@ export class LandingComponent implements OnInit {
 
   goRecipe(recipe: Recipe): void {
     this.router.navigate([`/recipe/${recipe.id}`]);
-  }
-
-  logout(): void {
-    //this.session.signOut();
-    //window.location.reload();
   }
 
 }
