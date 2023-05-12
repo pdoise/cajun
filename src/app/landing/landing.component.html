@@ -7,7 +7,7 @@
         <app-text-filter></app-text-filter>
         <button class="btn btn-primary mt-3"
           (click)="goAddRecipe()">
-          Add New Recipe
+          Create New Recipe
         </button>
       </div>
     </div>
@@ -19,10 +19,10 @@
     </div>
   </section>
 
-  <section *ngIf="(recipes$|async)?.length">
+  <section *ngIf="(filteredRecipes$|async)?.length">
     <h3 class="fw-light app-primary">Featured Recipes</h3>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-4">
-      <div class="col" class="py-5 bg-light" *ngFor="let recipe of (recipes$|async) | slice:0:8">
+      <div class="col-4" class="py-4 bg-light" *ngFor="let recipe of (filteredRecipes$|async) | slice:0:6">
         <div class="card shadow-sm h-100" (click)="goRecipe(recipe)">
           <div class="square-image-wrapper">
             <img *ngIf="recipe.img_src" class="card-img-top square-image" [src]="recipe.img_src">
@@ -42,42 +42,44 @@
     </div>
   </section>
 
-  <section *ngIf="(recipes$|async)?.length">
+  <section *ngIf="(filteredRecipes$|async)?.length">
     <h3 class="fw-light app-primary mt-5">All Recipes</h3>
-    <div class="app-table">
-      <table class="table table-hover">
-        <colgroup>
-          <col width="5%">
-          <col width="50%">
-          <col width="25%">
-          <col width="20%">
-        </colgroup>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Contributor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let recipe of (recipes$|async) | slice: (page-1) * pageSize : page * pageSize;" (click)="goRecipe(recipe)">
-            <td *ngIf="recipe.img_src"><img class="card-img-table" [src]="recipe.img_src"></td>
-            <td *ngIf="!recipe.img_src"><img class="card-img-table" src="/assets/images/no-image.png"></td>
-            <td>{{recipe.name}}</td>
-            <td>{{recipe.description}}</td>
-            <td>{{recipe.user?.username}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <pagination
-        [records]="recipes$"
-        [filteredRecords]="recipes$"
-        label="Total Recipes"
-        [page]="page"
-        [pageSize]="pageSize"
-        (pageChanged)="page = $event">
-      </pagination>
+    <div class="row py-4 bg-light">
+      <div class="app-table">
+        <table class="table table-hover bg-white">
+          <colgroup>
+            <col width="5%">
+            <col width="35%">
+            <col width="45%">
+            <col width="15%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Contributor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let recipe of (filteredRecipes$|async) | slice: (page-1) * pageSize : page * pageSize;" (click)="goRecipe(recipe)">
+              <td *ngIf="recipe.img_src"><img class="card-img-table" [src]="recipe.img_src"></td>
+              <td *ngIf="!recipe.img_src"><img class="card-img-table" src="/assets/images/no-image.png"></td>
+              <td>{{recipe.name}}</td>
+              <td>{{recipe.description}}</td>
+              <td>{{recipe.user?.username}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination
+          [records]="recipes$"
+          [filteredRecords]="filteredRecipes$"
+          label="Total Recipes"
+          [page]="page"
+          [pageSize]="pageSize"
+          (pageChanged)="page = $event">
+        </pagination>
+      </div>
     </div>
   </section>
 </app-primary-layout>

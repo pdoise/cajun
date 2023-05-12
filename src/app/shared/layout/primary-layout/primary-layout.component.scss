@@ -1,0 +1,12 @@
+.app-primary-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  padding-left: 175px;
+  padding-right: 175px;
+  flex-grow: 1;
+  overflow-y: auto;
+}

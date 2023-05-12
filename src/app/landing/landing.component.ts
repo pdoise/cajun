@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { RecipeActions } from '../state/app.actions';
-import { selectRecipes } from '../state/app.selector';
+import { selectRecipes, selectFilteredRecipes } from '../state/app.selector';
 import { Recipe } from 'src/app/app.models';
 
 @Component({
@@ -15,6 +15,7 @@ import { Recipe } from 'src/app/app.models';
 
 export class LandingComponent implements OnInit {
   recipes$: Observable<Recipe[]> = this.store.select(selectRecipes);
+  filteredRecipes$: Observable<Recipe[]> = this.store.select(selectFilteredRecipes);
   page: number = 1;
   pageSize: number = 10;
 

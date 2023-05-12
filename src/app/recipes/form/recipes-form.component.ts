@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
+import { AppFiltering } from '../../state/app.actions';
 import { RecipeActions } from '../../state/app.actions';
 import { selectRecipe } from '../../state/app.selector';
 import { Recipe } from 'src/app/app.models';
@@ -14,7 +15,7 @@ import { Recipe } from 'src/app/app.models';
   styleUrls: ['./recipes-form.component.scss']
 })
 
-export class RecipeFormComponent implements OnInit {
+export class RecipeFormComponent implements OnInit, OnDestroy {
   recipe$: Observable<Recipe> = this.store.select(selectRecipe);
   id: number = this.route.snapshot.params['id'];
   recipe = {} as Recipe;
@@ -50,6 +51,7 @@ export class RecipeFormComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.store.dispatch(AppFiltering.resetFilters());
     if (this.recipeSub) { this.recipeSub.unsubscribe(); }
   }
 

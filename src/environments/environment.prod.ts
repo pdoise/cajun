@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'https://cajun-cookbook.herokuapp.com',
+  API_URL: 'https://cajuncookbook.herokuapp.com',
 };

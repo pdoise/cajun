@@ -1,5 +1,5 @@
 import { Component, OnInit, DoCheck, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { Observable, Subscription, map, firstValueFrom } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 
 @Component({
   selector: 'pagination',
@@ -7,7 +7,7 @@ import { Observable, Subscription, map, firstValueFrom } from 'rxjs';
   styleUrls: ['./pagination.component.scss']
 })
 
-export class PaginationComponent implements OnInit, DoCheck {
+export class PaginationComponent implements OnInit, DoCheck, OnDestroy {
   @Input() records!: any;
   @Input() filteredRecords!: any;
   @Input() page: number = 1;
@@ -20,18 +20,23 @@ export class PaginationComponent implements OnInit, DoCheck {
   range!: string;
   lower!: number;
   upper!: number;
+  recordsSub!: Subscription;
 
   ngOnInit() {
-    firstValueFrom(this.records).then((records: any) => {
+    this.recordsSub = this.records.subscribe((records: any) => {
       this.total = records.length;
     })
-    firstValueFrom(this.filteredRecords).then((records: any) => {
+    this.recordsSub.add(this.filteredRecords.subscribe((records: any) => {
       this.collectionSize = records.length;
-    })
+    }))
   }
 
   ngDoCheck() {
     this.updateRangeValues();
+  }
+
+  ngOnDestroy(): void {
+    if (this.recordsSub) { this.recordsSub.unsubscribe(); }
   }
 
   pageChange() {

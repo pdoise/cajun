@@ -12,6 +12,11 @@ export const selectRecipe = createSelector(
 
 export const selectRecipes = createSelector(
   appSelector,
+  (state) => { return state.recipes }
+);
+
+export const selectFilteredRecipes = createSelector(
+  appSelector,
   (state) => {
     let filtered = [...state.recipes];
     // search

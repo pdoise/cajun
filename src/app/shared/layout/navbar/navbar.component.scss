@@ -1,6 +1,10 @@
 .navbar-component {
   color: white;
 
+  .navbar {
+    overflow: hidden !important;
+  }
+
   .logo {
     cursor: pointer;
     padding-left: 20px;

@@ -19,6 +19,9 @@ export const appReducer = createReducer(
     search = text;
     return { ...state, search: search };
   }),
+  on(AppFiltering.resetFilters, (state) => {
+    return { ...state, search: '' };
+  }),
   // Recipes
   on(RecipeActions.getRecipe, (state, { recipeId }) => {
     let recipe: Recipe = state.recipes.filter((r: any) => { return r.id == recipeId })[0] || {} as Recipe;

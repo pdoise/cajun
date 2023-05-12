@@ -15,7 +15,7 @@
             <img *ngIf="(recipe$|async)?.img_src" class="recipe-img" [src]="(recipe$|async)?.img_src">
             <img *ngIf="!(recipe$|async)?.img_src" class="recipe-img" src="/assets/images/no-image.png">
           </div>
-          <label class="form-label mt-3" for="image">{{(recipe$|async)?.img_src ? 'Edit Image': 'Add image'}}</label>
+          <label class="form-label mt-3" for="image">{{(recipe$|async)?.img_src ? 'Replace Image': 'Add image'}}</label>
           <div class="input-group">
             <input class="form-control" accept=".png, .jpg, .jpeg" type="file" id="image" (change)="onFileSelected($event)">
             <label *ngIf="image" class="input-group-text pointer btn btn-primary" (click)="saveRecipe()">Upload</label>
