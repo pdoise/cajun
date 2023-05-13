@@ -28,27 +28,13 @@ export const appReducer = createReducer(
     return { ...state, recipe: {...recipe} };
   }),
   on(RecipeActions.getRecipeSuccess, (state, { recipe }) => {
-    let updatedRecipe = {...recipe}
-    if (recipe.image) {
-      updatedRecipe = { ...recipe, img_src: `data:${recipe.image?.content_type};base64,${recipe.image?.data}` };
-    }
-    return { ...state, recipe: updatedRecipe };
+    return { ...state, recipe: recipe };
   }),
   on(RecipeActions.getUpdatedRecipe, (state, { recipe }) => {
     return { ...state, recipe: {...recipe} };
   }),
   on(RecipeActions.getRecipesSuccess, (state, { recipes }) => {
-    const updatedRecipes = recipes.map((recipe: Recipe) => {
-      if (recipe.image) {
-        return {
-          ...recipe,
-          img_src: `data:${recipe.image?.content_type};base64,${recipe.image?.data}`
-        };
-      } else {
-        return recipe;
-      }
-    });
-    return { ...state, recipes: updatedRecipes };
+    return { ...state, recipes: recipes };
   }),
   on(RecipeActions.createRecipe, (state, { recipe }) => {
     return {...state, recipes: [...state.recipes, recipe]};
