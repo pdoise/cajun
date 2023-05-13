@@ -1,46 +1,138 @@
 <app-primary-layout>
-  <section class="text-center">
-    <div class="row py-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light app-primary">Cajun Cookbook</h1>
-        <p class="lead text-muted app-primary">Louisiana’s Best Recipes-Cajun, Creole, and Southern</p>
-        <app-text-filter></app-text-filter>
-        <button class="btn btn-primary mt-3"
-          (click)="goAddRecipe()">
-          Create New Recipe
+  <div class="page-header" style="background-image: url('./assets/images/pasta2.png');">
+    <div class="filter"></div>
+    <div class="container">
+      <div class="motto text-center">
+        <h1>Cajun Cookbook</h1>
+        <h3>Louisiana’s Best Recipes-Cajun, Creole, and Southern.</h3>
+        <br />
+        <button type="button"
+          class="btn btn-outline-neutral btn-round">
+          Create Your Cookbook
         </button>
       </div>
     </div>
-  </section>
-
-  <section *ngIf="!(recipes$|async)?.length" class="text-center">
-    <div class="spinner-grow">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </section>
-
-  <section *ngIf="(filteredRecipes$|async)?.length">
-    <h3 class="fw-light app-primary">Featured Recipes</h3>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-6 g-4">
-      <div class="col-4" class="py-4 bg-light" *ngFor="let recipe of (filteredRecipes$|async) | slice:0:6">
-        <div class="card shadow-sm h-100" (click)="goRecipe(recipe)">
-          <div class="square-image-wrapper">
-            <img *ngIf="recipe.image_url" class="card-img-top square-image" [src]="recipe.image_url">
-            <img *ngIf="!recipe.image_url" class="card-img-top square-image" src="/assets/images/no-image.png">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">{{recipe.name}}</h5>
-            <p class="card-text">{{recipe.description}}</p>
-          </div>
-          <div class="card-footer">
-            <div class="d-flex justify-content-between align-items-center">
-              <small>Contributor: {{recipe.user?.username}}</small>
+  </div>
+  <div class="main">
+    <div class="section text-center">
+      <div class="container">
+        <h2 class="title text-primary">Featured Recipes</h2>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let recipe of (filteredRecipes$|async) | slice:0:6">
+            <div class="card card-plain pointer" (click)="goRecipe(recipe)">
+              <div class="card-image">
+                <img class="img-thumbnail img-responsive"  [src]="recipe.image_url" alt="/assets/images/no-image.png">
+              </div>
+              <div class="card-block">
+                <h4 class="card-title text-primary">{{recipe.name}}</h4>
+                <p class="card-description text-center">
+                  {{recipe.description}}
+                </p>
+              </div>
+              <div class="card-footer text-center">
+                <p>Contributor: {{recipe.user?.username}}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+
+    <div class="section section-dark text-center">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <h2 class="title">Your Personal Recipe Book</h2>
+            <h5 class="description">
+              Welcome to Cajun Cookbook, the perfect place to share and discover new recipes. Our app lets you create your very own recipe book, with the ability to rate and comment on other users' recipes. Whether you're looking for a classic jambalaya or a unique seafood gumbo, our community of passionate foodies has got you covered. Join us today and let's cook up some Cajun magic together!
+            </h5>
+            <br>
+            <button class="btn btn-primary btn-round">Get started</button>
+          </div>
+        </div>
+        <br/><br/>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="info">
+              <div class="description">
+                <h4 class="info-title">Build Your Own Cookbook</h4>
+                <p class="description">Create and customize your own cookbook filled with your favorite recipes. Save, organize, and access your recipes anytime, anywhere.</p>
+                <a class="btn btn-link btn-danger">Get started</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info">
+              <div class="description">
+                <h4 class="info-title">Share Your Recipes</h4>
+                <p> Share your recipes with a community of fellow cajun food enthusiasts. Get feedback, comments, and ratings on your recipes from other users. Discover new recipes and tips from other cajun cooks.</p>
+                <a class="btn btn-link btn-danger">Get started</a>
+              </div>
+            </div>
+              </div>
+              <div class="col-md-3">
+                <div class="info">
+                  <div class="description">
+                    <h4 class="info-title">Discover Authentic Cajun Flavors</h4>
+                    <p>Explore a collection of authentic cajun recipes, from classic dishes to new and innovative creations. Filter and search recipes by ingredients, cuisine type, and dietary restrictions to find the perfect recipe for your taste.</p>
+                    <a class="btn btn-link btn-danger">Get started</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="info">
+                  <div class="description">
+                    <h4 class="info-title">Connect with Others</h4>
+                    <p>Join a community of cajun food lovers who share the same passion for this delicious cuisine. Get inspired, share stories, and make new friends who share your love for cajun cooking.</p>
+                    <a class="btn btn-link btn-danger">Get started</a>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section landing-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h2 class="text-center">Questions, comments or feedback?</h2>
+              <form class="contact-form">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Name</label>
+                    <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Name" (focus)="focus=true" (blur)="focus=false" >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Email</label>
+                    <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">  <i class="fa fa-envelope"></i></span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Email" (focus)="focus1=true" (blur)="focus1=false" >
+                    </div>
+                  </div>
+                </div>
+                <label>Message</label>
+                <textarea class="form-control" rows="4" placeholder="Tell us your thoughts and feelings..."></textarea>
+                <div class="row">
+                  <div class="col-md-4 mr-auto ml-auto">
+                    <button class="btn btn-primary btn-lg btn-fill">Send Message</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!--
 
   <section *ngIf="(filteredRecipes$|async)?.length">
     <h3 class="fw-light app-primary mt-5">All Recipes</h3>
@@ -81,5 +173,5 @@
         </pagination>
       </div>
     </div>
-  </section>
+  </section> -->
 </app-primary-layout>

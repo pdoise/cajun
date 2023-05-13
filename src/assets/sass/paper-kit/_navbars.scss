@@ -21,7 +21,7 @@
         margin: $navbar-margin-brand;
         padding: $navbar-padding-brand;
         font-size: $font-size-base;
-        color: $default-color;
+        color: $primary-color;
         text-transform: uppercase;
     }
     .nav-link{
@@ -36,7 +36,7 @@
         }
         p{
             margin: 0px 0px;
-            color: #9A9A9A !important;
+            color: $primary-color;
             text-transform: uppercase;
             font-weight: 600;
             font-size: 12px;
@@ -56,7 +56,7 @@
             font-size: $font-size-small;
             text-transform: uppercase;
             font-weight: 600;
-            color: $default-color;
+            color: $primary-color;
          }
         .nav-item .nav-link.btn{
             margin: $navbar-margin-a-btn;
