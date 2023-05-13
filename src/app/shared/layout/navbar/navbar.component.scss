@@ -1,25 +1,9 @@
-.navbar-component {
-  color: white;
 
-  .navbar {
-    overflow: hidden !important;
+.nav-item {
+  i {
+
   }
-
-  .logo {
-    cursor: pointer;
-    padding-left: 20px;
-    i {
-      padding-right: 5px;
-    }
+  p {
+    vertical-align: sub;
   }
-
-  .user-dropdown {
-    i {
-      font-size: 25px;
-    }
-    .dropdown-toggle::after {
-      display:none;
-    }
-  }
-
 }
