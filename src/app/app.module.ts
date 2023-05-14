@@ -20,6 +20,7 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { RecipeShowComponent } from './cookbook/recipes/show/recipes-show.component';
 import { RecipeFormComponent } from './cookbook/recipes/form/recipes-form.component';
+import { SignupComponent } from './signup/signup.component';
 
 import { CustomHttpInterceptor } from './core/http.interceptor';
 
@@ -31,6 +32,7 @@ import { CustomHttpInterceptor } from './core/http.interceptor';
     LoginComponent,
     RecipeShowComponent,
     RecipeFormComponent,
+    SignupComponent,
   ],
   imports: [
     FormsModule,

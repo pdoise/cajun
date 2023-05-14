@@ -64,6 +64,6 @@ export class RecipeShowComponent implements OnInit, OnDestroy {
     this.router.navigate([`cookbook/${this.userId}/recipe/${this.recipeId}/edit`]);
   }
 
-  get canEdit(): boolean { return !!(this.auth.getCurrentUser().id == this.userId) }
+  get canEdit(): boolean { return !!(this.auth.getCurrentUser()?.id == this.userId) }
 
 }

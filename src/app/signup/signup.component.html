@@ -4,6 +4,24 @@
     <div class="card card-register">
       <h3 class="title">Welcome</h3>
       <form [formGroup]="form" class="register-form">
+        <label class="text-primary">First Name</label>
+        <input type="text"
+          class="form-control"
+          placeholder="First Name"
+          type="text"
+          formControlName="first">
+        <label class="text-primary">Last Name</label>
+        <input type="text"
+          class="form-control"
+          placeholder="Last Name"
+          type="text"
+          formControlName="last">
+        <label class="text-primary">Home Town</label>
+        <input type="text"
+          class="form-control"
+          placeholder="EX: Houma, La"
+          type="text"
+          formControlName="location">
         <label class="text-primary">Email</label>
         <input type="text"
           class="form-control"
@@ -16,6 +34,13 @@
           placeholder="Password"
           type="password"
           formControlName="password">
+        <label>Password Confirmation</label>
+        <input type="text"
+          class="form-control"
+          placeholder="Password Confirmation"
+          type="password"
+          formControlName="password_confirmation">
+          <small class="text-black">Password must be at least 6 characters long and contain at least one letter and one digit</small>
       </form>
       <ngb-alert *ngIf="errorMessage"
         type="danger"
@@ -28,12 +53,9 @@
         </div>
       </ngb-alert>
       <button class="btn btn-primary btn-block btn-round"
-        (click)="login()">
-        Login
+        (click)="signUp()">
+        Sign Up
       </button>
-      <div class="forgot">
-        <a href="#" class="btn btn-link btn-primary">Forgot password?</a>
-      </div>
     </div>
   </div>
 </app-primary-layout>

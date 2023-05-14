@@ -5,8 +5,8 @@
       <div class="owner2">
         <div class="avatar">
           <img src="/assets/images/no-image.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-          <h4>{{(user$|async)?.name}}</h4>
-          <h6 class="description">Houma, LA</h6>
+          <h4>{{(user$|async)?.first}} {{(user$|async)?.last}}</h4>
+          <h6 class="description">{{(user$|async)?.location}}</h6>
         </div>
       </div>
       <button *ngIf="canEdit"

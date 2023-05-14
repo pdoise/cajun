@@ -40,5 +40,5 @@ export class CookBookComponent implements OnInit {
     this.router.navigate([`/cookbook/${this.userId}/recipe/${recipe.id}`]);
   }
 
-  get canEdit(): boolean { return !!(this.auth.getCurrentUser().id == this.userId) }
+  get canEdit(): boolean { return !!(this.auth.getCurrentUser()?.id == this.userId) }
 }

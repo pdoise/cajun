@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router";
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -11,20 +12,35 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private baseUrl = environment.API_URL;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credentials).pipe(
       tap((response: any) => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('currentUser', JSON.stringify(response.user));
+        this.router.navigate([`/cookbook/${response.user.id}`]);
       })
     );
+  }
+
+  signUp(user: any) {
+    return this.http.post(`${this.baseUrl}/create`, {user: user}).pipe(
+      tap((response: any) => {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('currentUser', JSON.stringify(response.user));
+        this.router.navigate([`/cookbook/${response.user.id}`]);
+      })
+    );;
   }
 
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
+    this.router.navigate(['/landing']);
   }
 
   getToken() {

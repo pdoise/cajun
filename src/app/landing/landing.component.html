@@ -36,7 +36,7 @@
                 </p>
               </div>
               <div class="card-footer text-center">
-                <p>Contributor: {{recipe.user?.username}}</p>
+                <p>Contributor: {{recipe.user?.first}} {{recipe.user?.last}}</p>
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@
               <td *ngIf="!recipe.image_url"><img class="card-img-table" src="/assets/images/no-image.png"></td>
               <td>{{recipe.name}}</td>
               <td>{{recipe.description}}</td>
-              <td>{{recipe.user?.username}}</td>
+              <td>{{recipe.user?.first}} {{recipe.user?.last}}</td>
             </tr>
           </tbody>
         </table>
