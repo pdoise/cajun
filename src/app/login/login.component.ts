@@ -16,10 +16,10 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.auth.login('blankpage985', 'password')
-    .subscribe((response) => {
-      console.log(response)
-    });
+    //this.auth.login('blankpage985', 'password')
+    //.subscribe((response) => {
+    //  console.log(response)
+    //});
 
     this.form = this.formBuilder.group({
       email: [''],
