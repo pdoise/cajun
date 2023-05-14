@@ -9,7 +9,6 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { PrimaryLayoutComponent } from './layout/primary-layout/primary-layout.component';
 import { TrowserLayoutComponent } from './layout/trowser-layout/trowser-layout.component';
 
-import { CheckboxSelectComponent } from './components/checkbox-select/checkbox-select.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { TextFilterComponent } from './components/text-filter/text-filter.component';
 
@@ -17,7 +16,6 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { WhitelistKeysPipe } from './pipes/whitelist-keys.pipe';
 
 const components = [
-  CheckboxSelectComponent,
   PaginationComponent,
   TextFilterComponent,
   NavbarComponent,
@@ -36,7 +34,7 @@ const pipes = [
     CommonModule,
     FormsModule,
     RouterModule,
-    NgbModule
+    NgbModule,
   ],
   declarations: [
     components,

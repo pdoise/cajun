@@ -10,31 +10,26 @@
     </div>
     <div class="navbar-collapse justify-content-end">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" rel="tooltip" title="Like us on Facebook" href="https://www.facebook.com" target="_blank">
-            <i class="fa fa-facebook-square"></i>
-            <p class="d-lg-none">Facebook</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" rel="tooltip" title="Follow us on Instagram" href="https://www.instagram.com" target="_blank">
-            <i class="fa fa-instagram"></i>
-            <p class="d-lg-none">Instagram</p>
-          </a>
-        </li>
-        <li class="nav-item me-5">
-          <a class="nav-link" rel="tooltip" title="Star on GitHub" href="https://www.github.com" target="_blank">
-            <i class="fa fa-github"></i>
-            <p class="d-lg-none">GitHub</p>
-          </a>
-        </li>
-        <li class="nav-item" *ngIf="auth.isAuthenticated()">
-          <a [routerLink]="['/landing']"
-            class="nav-link">
-            <i class="fa fa-book"></i>
-            <p>My Cookbook</p>
-          </a>
-        </li>
+        <ng-container *ngIf="!auth.isAuthenticated()">
+          <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="Like us on Facebook" href="https://www.facebook.com" target="_blank">
+              <i class="fa fa-facebook-square"></i>
+              <p class="d-lg-none">Facebook</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="Follow us on Instagram" href="https://www.instagram.com" target="_blank">
+              <i class="fa fa-instagram"></i>
+              <p class="d-lg-none">Instagram</p>
+            </a>
+          </li>
+          <li class="nav-item me-5">
+            <a class="nav-link" rel="tooltip" title="Star on GitHub" href="https://www.github.com" target="_blank">
+              <i class="fa fa-github"></i>
+              <p class="d-lg-none">GitHub</p>
+            </a>
+          </li>
+        </ng-container>
         <li class="nav-item">
           <a [routerLink]="['/landing']"
             class="nav-link">
@@ -42,19 +37,37 @@
             <p>Search Recipes</p>
           </a>
         </li>
-        <li class="nav-item" *ngIf="auth.isAuthenticated()">
-          <a [routerLink]="['/landing']"
-            class="nav-link">
-            <i class="fa fa-user"></i>
-            <p>Profile</p>
-          </a>
-        </li>
-        <li class="nav-item" *ngIf="!auth.isAuthenticated()">
-          <a [routerLink]="['/login']" class="btn btn-primary btn-round">Login</a>
-        </li>
-        <li class="nav-item" *ngIf="!auth.isAuthenticated()">
-          <a [routerLink]="['/signup']" class="btn btn-primary btn-round">Sign Up</a>
-        </li>
+        <ng-container *ngIf="auth.isAuthenticated()">
+          <li class="nav-item">
+            <a [routerLink]="['/my_cookbook/' + auth.getCurrentUser().id]"
+              class="nav-link">
+              <i class="fa fa-book"></i>
+              <p>My Cookbook</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <div ngbDropdown class="d-inline-block dropdown">
+              <a [routerLink]="['/landing']"
+                class="nav-link"
+                ngbDropdownToggle>
+                <i class="fa fa-user"></i>
+                <p>Profile</p>
+              </a>
+              <div ngbDropdownMenu class="dropdown-primary">
+                <button ngbDropdownItem>Settings</button>
+                <button ngbDropdownItem (click)="logout()">Logout</button>
+              </div>
+            </div>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="!auth.isAuthenticated()">
+          <li class="nav-item">
+            <a [routerLink]="['/login']" class="btn btn-primary btn-round">Login</a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/signup']" class="btn btn-primary btn-round">Sign Up</a>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </div>

@@ -15,6 +15,7 @@ import { appReducer } from './state/app.reducer';
 import { RecipeEffects } from './state/app.effects';
 
 import { AppComponent } from './app.component';
+import { CookBookComponent } from './cookbook/cookbook.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { RecipeShowComponent } from './recipes/show/recipes-show.component';
@@ -25,6 +26,7 @@ import { CustomHttpInterceptor } from './core/http.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
+    CookBookComponent,
     LandingComponent,
     LoginComponent,
     RecipeShowComponent,

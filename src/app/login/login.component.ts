@@ -16,19 +16,27 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.auth.login('blankpage985', 'password')
+    //this.auth.login({username: 'blankpage985', password: 'password'})
     //.subscribe((response) => {
     //  console.log(response)
     //});
 
     this.form = this.formBuilder.group({
-      email: [''],
+      username: [''],
       password: ['']
     });
   }
 
+  login() {
+    this.auth.login(this.form.getRawValue()).subscribe((response) => {
+      console.log(response)
+    }, error => {
+      // handle login error
+    });
+  }
+
   ngOnDestroy() {
-    this.auth.logout();
+    //this.auth.logout();
   }
 
 }

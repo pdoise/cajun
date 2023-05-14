@@ -21,14 +21,17 @@
             <input type="text"
               class="form-control"
               placeholder="Email"
-              formControlName="email">
+              formControlName="username">
             <label class="text-primary">Password</label>
             <input type="text"
               class="form-control"
               placeholder="Password"
               formControlName="password">
             <label>Password</label>
-            <button class="btn btn-primary btn-block btn-round">Login</button>
+            <button class="btn btn-primary btn-block btn-round"
+              (click)="login()">
+              Login
+            </button>
           </form>
           <div class="forgot">
             <a href="#" class="btn btn-link btn-primary">Forgot password?</a>

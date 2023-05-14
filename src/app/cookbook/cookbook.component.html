@@ -1,0 +1,45 @@
+<app-primary-layout>
+  <div class="container mt-5">
+    <div class="motto text-center">
+      <h2 class="title-uppercase">My Cookbook</h2>
+      <div class="owner2">
+        <div class="avatar">
+          <img src="/assets/images/no-image.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+          <h4>Phillip Doise</h4>
+          <h6 class="description">Houma, LA</h6>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-round mb-3" (click)="goCreateRecipe()">
+        <i class="fa fa-cog"></i>
+        Add Recipe
+      </button>
+      <app-text-filter></app-text-filter>
+    </div>
+  </div>
+  <div class="main">
+    <div class="section text-center">
+      <div class="container">
+        <h2 class="title text-primary">My Recipes</h2>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let recipe of (filteredRecipes$|async) | slice:0:6">
+            <div class="card card-plain pointer" (click)="goRecipe(recipe)">
+              <div class="card-image">
+                <img class="img-thumbnail img-responsive" *ngIf="recipe.image_url" [src]="recipe.image_url">
+                <img class="img-thumbnail img-responsive" *ngIf="!recipe.image_url" src="/assets/images/no-image.png">
+              </div>
+              <div class="card-block">
+                <h4 class="card-title text-primary">{{recipe.name}}</h4>
+                <p class="card-description text-center">
+                  {{recipe.description}}
+                </p>
+              </div>
+              <div class="card-footer text-center">
+                <p>Contributor: {{recipe.user?.username}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-primary-layout>
