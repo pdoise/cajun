@@ -1,41 +1,50 @@
 <app-primary-layout>
-  <div class="card shadow-sm">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <h5 class="card-title">{{(recipe$|async)?.name}}</h5>
-      <button type="button"
-        class="btn btn-outline-light"
-        (click)="goEditRecipe()">
-        Edit Recipe
-      </button>
+  <div class="wrapper">
+    <div class="page-header page-header-xs" style="background-image: url({{recipe.image_url}});">
+      <div class="filter"></div>
     </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-4 card-row">
-          <div class="recipe-img-container">
-            <img *ngIf="(recipe$|async)?.image_url" class="recipe-img" [src]="(recipe$|async)?.image_url">
-            <img *ngIf="!(recipe$|async)?.image_url" class="recipe-img" src="/assets/images/no-image.png">
-          </div>
-          <label class="form-label mt-3" for="image">{{(recipe$|async)?.image_url ? 'Replace Image': 'Add image'}}</label>
-          <div class="input-group">
-            <input class="form-control" accept=".png, .jpg, .jpeg" type="file" id="image" (change)="onFileSelected($event)">
-            <label *ngIf="image" class="input-group-text pointer btn btn-primary" (click)="saveRecipe()">Upload</label>
+    <div class="mt-3">
+      <div class="container">
+        <div class="text-primary">
+          <label for="file-upload">
+            <i class="fa fa-camera"></i> {{(recipe$|async)?.image_url ? 'Replace Image': 'Add image'}}
+          </label>
+          <input id="file-upload" accept=".png, .jpg, .jpeg" type="file" style="display:none" (change)="onFileSelected($event)">
+        </div>
+        <div class="owner">
+          <div class="name">
+            <h4 class="title text-primary">{{(recipe$|async)?.name}}<br /></h4>
           </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 card-row">
-          <h5>Ingredients:</h5>
-          <p [innerHtml]="(recipe$|async)?.ingredients"></p>
+        <div class="row mb-5">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 ml-auto mr-auto text-center">
+            <p>{{(recipe$|async)?.description}}</p>
+            <br />
+            <button class="btn btn-outline-primary btn-round"
+              (click)="goEditRecipe()">
+              <i class="fa fa-cog"></i>
+              Edit Recipe
+            </button>
+          </div>
+          <div class="col-md-2"></div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 card-row">
-          <h5>Directions:</h5>
-          <p [innerHtml]="(recipe$|async)?.directions"></p>
+        <div class="border-bottom"></div>
+        <div class="row mt-5">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-5">
+                <h5 class="text-primary">Ingredients:</h5>
+                <p class="pre" [innerHtml]="(recipe$|async)?.ingredients"></p>
+              </div>
+              <div class="col-md-7">
+                <h5 class="text-primary">Directions:</h5>
+                <p class="pre" [innerHtml]="(recipe$|async)?.directions"></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="card-footer">
-      <div class="d-flex justify-content-between align-items-center">
-        <small>Contributor: {{(recipe$|async)?.user?.username}}</small>
-        <p class="card-text">{{(recipe$|async)?.description}}</p>
-      </div>
-   </div>
   </div>
 </app-primary-layout>

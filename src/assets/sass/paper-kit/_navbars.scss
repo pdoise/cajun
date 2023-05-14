@@ -59,6 +59,7 @@
             color: $primary-color;
          }
         .nav-item .nav-link.btn{
+          color: $primary-color;
             margin: $navbar-margin-a-btn;
             padding: 9px;
 
@@ -147,6 +148,7 @@
 .navbar.fixed-top{
     .nav-link{
         i{
+          color: $primary-color;
             top: 4px;
         }
     }
@@ -199,7 +201,6 @@
         .open .nav-link:hover,
         .open .nav-link:focus {
             background-color: transparent;
-            color: $default-color;
             @include opacity(1);
         }
     }

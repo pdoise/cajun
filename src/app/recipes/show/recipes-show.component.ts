@@ -22,6 +22,7 @@ export class RecipeShowComponent implements OnInit {
   form!: FormGroup;
   image!: File;
   private recipesURl = environment.API_URL + '/recipes';
+  recipe!: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,10 +34,14 @@ export class RecipeShowComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(RecipeActions.getRecipe({recipeId: this.route.snapshot.params['id']}));
+    this.recipe$.subscribe((recipe) => {
+      this.recipe = recipe
+    })
   }
 
   onFileSelected(event: any) {
     this.image = event.target.files[0];
+    this.saveRecipe();
   }
 
   saveRecipe(): void {
