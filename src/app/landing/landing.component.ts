@@ -14,8 +14,6 @@ import { Recipe } from 'src/app/app.models';
 })
 
 export class LandingComponent implements OnInit {
-  focus: any;
-  focus1: any;
   recipes$: Observable<Recipe[]> = this.store.select(selectRecipes);
   filteredRecipes$: Observable<Recipe[]> = this.store.select(selectFilteredRecipes);
   page: number = 1;

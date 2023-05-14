@@ -1,4 +1,60 @@
-<app-trowser-layout
+<app-primary-layout>
+  <div class="container section">
+    <form [formGroup]="form">
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <label>Name</label>
+          <input type="text"
+            class="form-control"
+            placeholder="Name"
+            formControlName="name">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <label>Description</label>
+          <input type="text"
+             class="form-control"
+             placeholder="Write a small description of what this recipe is, its origin, or what it means to you."
+             formControlName="description">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <label>Ingredients</label>
+          <div>
+            <textarea class="form-control"
+              rows="6"
+              placeholder="Ingredients"
+              formControlName="ingredients">
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <label>Directions</label>
+          <div>
+            <textarea class="form-control"
+              rows="6"
+              placeholder="Directions"
+              formControlName="directions">
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <button class="btn btn-outline-primary btn-round"
+      (click)="saveRecipe()">
+      <i class="fa fa-cog"></i>
+      Save Recipe
+    </button>
+  </div>
+</app-primary-layout>
+
+<!-- <app-trowser-layout
   header="{{recipe.name || 'Create Recipe'}}"
   (cancel)="cancel()">
   <div content>
@@ -47,4 +103,4 @@
       [disabled]="formInvalid">Submit
     </button>
   </div>
-</app-trowser-layout>
+</app-trowser-layout> -->
