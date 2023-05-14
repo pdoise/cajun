@@ -4,12 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { CookBookComponent } from './cookbook/cookbook.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
-import { RecipeShowComponent } from './recipes/show/recipes-show.component';
-import { RecipeFormComponent } from './recipes/form/recipes-form.component';
+import { RecipeShowComponent } from './cookbook/recipes/show/recipes-show.component';
+import { RecipeFormComponent } from './cookbook/recipes/form/recipes-form.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [{
-  path: 'my_cookbook/:userId',
+  path: 'cookbook/:userId',
   component: CookBookComponent,
   canActivate: [AuthGuard]
 },{
@@ -19,14 +19,14 @@ const routes: Routes = [{
   path: 'login',
   component: LoginComponent,
 },{
-  path: 'recipe/new',
+  path: 'cookbook/:userId/recipe/new',
   component: RecipeFormComponent,
   canActivate: [AuthGuard]
 },{
-  path: 'recipe/:id',
+  path: 'cookbook/:userId/recipe/:recipeId',
   component: RecipeShowComponent
 },{
-  path: 'recipe/:id/edit',
+  path: 'cookbook/:userId/recipe/:recipeId/edit',
   component: RecipeFormComponent,
   canActivate: [AuthGuard]
 },{

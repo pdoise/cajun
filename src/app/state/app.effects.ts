@@ -5,13 +5,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { Recipe } from '../app.models';
-import { RecipeActions } from './app.actions';
+import { Recipe, User } from '../app.models';
+import { UserActions, RecipeActions } from './app.actions';
 
 import { environment } from 'src/environments/environment';
 
 @Injectable()
-export class RecipeEffects {
+export class AppEffects {
+  private usersURl = environment.API_URL + '/users';
   private recipesURl = environment.API_URL + '/recipes';
 
   constructor(
@@ -20,6 +21,28 @@ export class RecipeEffects {
     private store: Store,
     private http: HttpClient
   ) {}
+
+  getUser$ = createEffect(() => this.actions$.pipe(
+    ofType(UserActions.getUser),
+    mergeMap((action) => {
+      return this.http.get<User>(`${this.usersURl}/${action.userId}`).pipe(
+        map((user: User) => {
+          return UserActions.getUserSuccess({user})
+        })
+      )
+    })
+  ));
+
+  getUserRecipes$ = createEffect(() => this.actions$.pipe(
+    ofType(UserActions.getUserRecipes),
+    mergeMap((action) => {
+      return this.http.get<Recipe[]>(`${this.usersURl}/${action.userId}/recipes`).pipe(
+        map((recipes: Recipe[]) => {
+          return UserActions.getUserRecipesSuccess({recipes})
+        })
+      )
+    })
+  ));
 
   getRecipes$ = createEffect(() => this.actions$.pipe(
     ofType(RecipeActions.getRecipes),
@@ -35,7 +58,7 @@ export class RecipeEffects {
   getRecipe$ = createEffect(() => this.actions$.pipe(
     ofType(RecipeActions.getRecipe),
     switchMap((action) => {
-      return this.http.get<Recipe>(`${this.recipesURl}/${action.recipeId}`).pipe(
+      return this.http.get<Recipe>(`${this.usersURl}/${action.userId}/recipes/${action.recipeId}`).pipe(
         map((recipe: Recipe) => {
           return RecipeActions.getRecipeSuccess({recipe})
         })
@@ -47,7 +70,7 @@ export class RecipeEffects {
     ofType(RecipeActions.createRecipe),
     switchMap((action) => {
       this.router.navigate(['/landing']);
-      return this.http.post<Recipe>(this.recipesURl, { recipe: action.recipe }).pipe(
+      return this.http.post<Recipe>(`${this.usersURl}/${action.userId}/recipes`, { recipe: action.recipe }).pipe(
         map((recipe: Recipe) => {
           this.store.dispatch(RecipeActions.getRecipes());
           return RecipeActions.createRecipeSuccess({recipe});
@@ -60,7 +83,7 @@ export class RecipeEffects {
     ofType(RecipeActions.updateRecipe),
     switchMap((action) => {
       this.router.navigate([`/recipe/${action.recipeId}`]);
-      return this.http.put<Recipe>(`${this.recipesURl}/${action.recipeId}`, { recipe: action.recipe }).pipe(
+      return this.http.put<Recipe>(`${this.usersURl}/${action.userId}/recipes/${action.recipeId}`, { recipe: action.recipe }).pipe(
         map((recipe: Recipe) => {
           this.store.dispatch(RecipeActions.getUpdatedRecipe({recipe}));
           this.store.dispatch(RecipeActions.getRecipes());
@@ -74,7 +97,7 @@ export class RecipeEffects {
     ofType(RecipeActions.deleteRecipe),
     switchMap((action) => {
       this.router.navigate(['/landing']);
-      return this.http.delete<Recipe>(`${this.recipesURl}/${action.recipeId}`).pipe(
+      return this.http.delete<Recipe>(`${this.usersURl}/${action.userId}/recipes/${action.recipeId}`).pipe(
         map(() => {
           this.store.dispatch(RecipeActions.getRecipes());
           return RecipeActions.deleteRecipeSuccess();

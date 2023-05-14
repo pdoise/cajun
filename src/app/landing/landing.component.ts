@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
+import { AuthService } from '../auth/auth.service';
 import { RecipeActions } from '../state/app.actions';
 import { selectRecipes, selectFilteredRecipes } from '../state/app.selector';
 import { Recipe } from 'src/app/app.models';
@@ -20,6 +21,7 @@ export class LandingComponent implements OnInit {
   pageSize: number = 10;
 
   constructor(
+    private auth: AuthService,
     private store: Store,
     private router: Router,
     private route: ActivatedRoute,
@@ -34,7 +36,7 @@ export class LandingComponent implements OnInit {
   }
 
   goRecipe(recipe: Recipe): void {
-    this.router.navigate([`/recipe/${recipe.id}`]);
+    this.router.navigate([`/cookbook/${this.auth.getCurrentUser().id}/recipe/${recipe.id}`]);
   }
 
 }

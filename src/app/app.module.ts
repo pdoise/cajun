@@ -12,14 +12,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 import { appReducer } from './state/app.reducer';
-import { RecipeEffects } from './state/app.effects';
+import { AppEffects } from './state/app.effects';
 
 import { AppComponent } from './app.component';
 import { CookBookComponent } from './cookbook/cookbook.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
-import { RecipeShowComponent } from './recipes/show/recipes-show.component';
-import { RecipeFormComponent } from './recipes/form/recipes-form.component';
+import { RecipeShowComponent } from './cookbook/recipes/show/recipes-show.component';
+import { RecipeFormComponent } from './cookbook/recipes/form/recipes-form.component';
 
 import { CustomHttpInterceptor } from './core/http.interceptor';
 
@@ -41,7 +41,7 @@ import { CustomHttpInterceptor } from './core/http.interceptor';
     SharedModule,
     HttpClientModule,
     StoreModule.forRoot({app: appReducer}),
-    EffectsModule.forRoot([RecipeEffects])
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },],
   bootstrap: [AppComponent]

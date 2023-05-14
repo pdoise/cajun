@@ -1,6 +1,6 @@
 import { createActionGroup, props, emptyProps } from '@ngrx/store';
 
-import { Recipe } from '../app.models';
+import { User, Recipe } from '../app.models';
 
 export const AppAuth = createActionGroup({
   source: '[App Auth]',
@@ -25,25 +25,37 @@ export const AppFiltering = createActionGroup({
   },
 });
 
+export const UserActions = createActionGroup({
+  source: '[Users API]',
+  events: {
+    'Get User': props<{ userId: number }>(),
+    'Get User Success': props<{ user: User }>(),
+
+    'Get User Recipes':  props<{ userId: number }>(),
+    'Get User Recipes Success': props<{ recipes: Recipe[] }>(),
+  },
+});
+
 export const RecipeActions = createActionGroup({
   source: '[Recipes API]',
   events: {
+
     'Get Recipes': emptyProps(),
     'Get Recipes Success': props<{ recipes: Recipe[] }>(),
 
-    'Get Recipe': props<{ recipeId: number }>(),
+    'Get Recipe': props<{ userId: number, recipeId: number }>(),
     'Get Recipe Success': props<{ recipe: Recipe }>(),
 
-    'Update Recipe': props<{ recipe: Recipe, recipeId: number | null }>(),
+    'Update Recipe': props<{ userId: number, recipe: Recipe, recipeId: number | null }>(),
     'Update Pnp Success': props<{ recipe: Recipe }>(),
 
     'Get Updated Recipe': props<{ recipe: Recipe }>(),
     'Get Updated Recipe Success': props<{ recipe: Recipe }>(),
 
-    'Create Recipe': props<{ recipe: Recipe }>(),
+    'Create Recipe': props<{ userId: number, recipe: Recipe }>(),
     'Create Recipe Success': props<{ recipe: Recipe }>(),
 
-    'Delete Recipe': props<{ recipeId: number }>(),
+    'Delete Recipe': props<{ userId: number, recipeId: number }>(),
     'Delete Recipe Success': emptyProps(),
   },
 });

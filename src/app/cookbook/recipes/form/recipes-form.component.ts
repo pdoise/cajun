@@ -5,9 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { AppFiltering } from '../../state/app.actions';
-import { RecipeActions } from '../../state/app.actions';
-import { selectRecipe } from '../../state/app.selector';
+import { AppFiltering } from '../../../state/app.actions';
+import { RecipeActions } from '../../../state/app.actions';
+import { selectRecipe } from '../../../state/app.selector';
 import { Recipe } from 'src/app/app.models';
 
 @Component({
@@ -17,7 +17,8 @@ import { Recipe } from 'src/app/app.models';
 
 export class RecipeFormComponent implements OnInit, OnDestroy {
   recipe$: Observable<Recipe> = this.store.select(selectRecipe);
-  id: number = this.route.snapshot.params['id'];
+  userId: number = this.route.snapshot.params['userId'];
+  recipeId: number = this.route.snapshot.params['recipeId'];
   recipe = {} as Recipe;
   isEdit!: boolean;
   form!: FormGroup;
@@ -32,8 +33,8 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    if (this.route.snapshot.params['id']) {
-      this.store.dispatch(RecipeActions.getRecipe({recipeId: this.route.snapshot.params['id']}));
+    if (this.route.snapshot.params['recipeId']) {
+      this.store.dispatch(RecipeActions.getRecipe({userId: this.userId, recipeId: this.recipeId}));
       this.isEdit = true;
     }
 
@@ -57,17 +58,18 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
 
   saveRecipe(): void {
     if (this.isEdit) {
-      this.store.dispatch(RecipeActions.updateRecipe({ recipe: this.form.getRawValue(), recipeId: this.recipe.id }));
+      this.store.dispatch(RecipeActions.updateRecipe({ recipe: this.form.getRawValue(), userId: this.userId, recipeId: this.recipe.id }));
     } else {
-      this.store.dispatch(RecipeActions.createRecipe({ recipe: this.form.getRawValue() }));
+      this.store.dispatch(RecipeActions.createRecipe({ recipe: this.form.getRawValue(), userId: this.userId, }));
     }
+    this.router.navigate([`/cookbook/${this.userId}`]);
   }
 
   cancel() {
     if ( this.isEdit) {
-      this.router.navigate([`recipe/${this.recipe.id}`]);
+      this.router.navigate([`/cookbook/${this.userId}/recipe/${this.recipe.id}`]);
     } else {
-      this.router.navigate([`landing`]);
+      this.router.navigate([`/cookbook/${this.userId}`]);
     }
   }
 

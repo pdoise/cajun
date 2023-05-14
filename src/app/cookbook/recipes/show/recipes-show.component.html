@@ -21,7 +21,8 @@
           <div class="col-md-8 ml-auto mr-auto text-center">
             <p>{{(recipe$|async)?.description}}</p>
             <br />
-            <button class="btn btn-outline-primary btn-round"
+            <button *ngIf="canEdit"
+              class="btn btn-outline-primary btn-round"
               (click)="goEditRecipe()">
               <i class="fa fa-cog"></i>
               Edit Recipe

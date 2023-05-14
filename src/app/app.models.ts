@@ -15,8 +15,9 @@ export class Recipe {
 
 export class User {
   id!: number | null;
+  name!: string;
   username!: string;
   email!: string;
   avatar?: string | null;
-  bio?: number;
+  location?: string;
 }

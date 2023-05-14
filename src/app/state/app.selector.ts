@@ -5,6 +5,26 @@ import { AppState } from './app.state';
 
 export const appSelector = createFeatureSelector<AppState>('app');
 
+export const selectUser = createSelector(
+  appSelector,
+  (state) => { return state.user }
+);
+
+export const selectUserRecipes = createSelector(
+  appSelector,
+  (state) => { return state.userRecipes }
+);
+
+export const selectFilteredUserRecipes = createSelector(
+  appSelector,
+  (state) => {
+    let filtered = [...state.userRecipes];
+    // search
+    filtered = new SearchFilterPipe().transform(state.search, filtered);
+    return filtered;
+  }
+);
+
 export const selectRecipe = createSelector(
   appSelector,
   (state) => { return state.recipe }
