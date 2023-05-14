@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 
+import { AuthService } from 'src/app/auth/auth.service';
+
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
@@ -10,7 +12,11 @@ export class NavbarComponent implements OnInit {
   private toggleButton: any;
   private sidebarVisible: boolean = false;
 
-  constructor(public location: Location, private element: ElementRef) {}
+  constructor(
+    public location: Location,
+    private element: ElementRef,
+    public auth: AuthService
+  ) {}
 
   ngOnInit() {
     const navbar: HTMLElement = this.element.nativeElement;

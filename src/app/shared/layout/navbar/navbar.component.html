@@ -28,7 +28,7 @@
             <p class="d-lg-none">GitHub</p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="auth.isAuthenticated()">
           <a [routerLink]="['/landing']"
             class="nav-link">
             <i class="fa fa-book"></i>
@@ -42,12 +42,18 @@
             <p>Search Recipes</p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="auth.isAuthenticated()">
           <a [routerLink]="['/landing']"
             class="nav-link">
             <i class="fa fa-user"></i>
             <p>Profile</p>
           </a>
+        </li>
+        <li class="nav-item" *ngIf="!auth.isAuthenticated()">
+          <a [routerLink]="['/login']" class="btn btn-primary btn-round">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!auth.isAuthenticated()">
+          <a [routerLink]="['/signup']" class="btn btn-primary btn-round">Sign Up</a>
         </li>
       </ul>
     </div>
