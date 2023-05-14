@@ -25,7 +25,8 @@
           <div class="col-md-4" *ngFor="let recipe of (filteredRecipes$|async) | slice:0:6">
             <div class="card card-plain pointer" (click)="goRecipe(recipe)">
               <div class="card-image">
-                <img class="img-thumbnail img-responsive"  [src]="recipe.image_url" alt="/assets/images/no-image.png">
+                <img class="img-thumbnail img-responsive" *ngIf="recipe.image_url" [src]="recipe.image_url">
+                <img class="img-thumbnail img-responsive" *ngIf="!recipe.image_url" src="/assets/images/no-image.png">
               </div>
               <div class="card-block">
                 <h4 class="card-title text-primary">{{recipe.name}}</h4>
