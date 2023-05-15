@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -45,7 +46,9 @@ import { CustomHttpInterceptor } from './core/http.interceptor';
     StoreModule.forRoot({app: appReducer}),
     EffectsModule.forRoot([AppEffects])
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

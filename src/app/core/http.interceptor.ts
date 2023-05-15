@@ -5,10 +5,13 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
+import { AuthService } from '../auth/auth.service';
+
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
 
   constructor(
+    private auth: AuthService,
     private router: Router,
     private store: Store,
   ) {};
@@ -17,8 +20,16 @@ export class CustomHttpInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
     if (token) {
-      const authReq = req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`)});
-      return next.handle(authReq);
+      const authReq = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${token}`),
+        withCredentials: true
+      });
+      return next.handle(authReq).pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.router.navigate([`error/${error.status}`]);
+          return throwError(() => new Error('An error has occured; please try again later.'));
+        })
+      );
     } else {
       return next.handle(req);
     }

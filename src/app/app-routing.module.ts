@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CookBookComponent } from './cookbook/cookbook.component';
+import { ErrorPageComponent } from './shared/layout/error-page/error-page.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { RecipeShowComponent } from './cookbook/recipes/show/recipes-show.component';
@@ -34,9 +35,16 @@ const routes: Routes = [{
   path: 'signup',
   component: SignupComponent,
 },{
+  path: 'error/:error',
+  component: ErrorPageComponent,
+},{
   path: '',
   redirectTo: 'landing',
   pathMatch: 'full'
+},{
+  path: '**',
+  pathMatch: 'full',
+  redirectTo: 'error/404'
 }];
 
 @NgModule({

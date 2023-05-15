@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { ErrorPageComponent } from './layout/error-page/error-page.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { PrimaryLayoutComponent } from './layout/primary-layout/primary-layout.component';
@@ -16,6 +17,7 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { WhitelistKeysPipe } from './pipes/whitelist-keys.pipe';
 
 const components = [
+  ErrorPageComponent,
   PaginationComponent,
   TextFilterComponent,
   NavbarComponent,
