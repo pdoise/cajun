@@ -10,7 +10,7 @@ export class Recipe {
   user!: User | null;
   user_id!: number;
   image!: any;
-  image_url!: string;
+  image_url?: string;
 }
 
 export class User {
@@ -20,4 +20,5 @@ export class User {
   email!: string;
   avatar?: string | null;
   location?: string;
+  image_url?: string;
 }

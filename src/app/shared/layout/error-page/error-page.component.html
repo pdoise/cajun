@@ -5,6 +5,8 @@
       <span [ngSwitch]="route.snapshot.params['error']">
         <!-- 400 Bad Request -->
         <span *ngSwitchCase="'400'">Sorry, the server cannot process that request.</span>
+        <!-- 401 Unauthorized -->
+        <span *ngSwitchCase="'401'">Sorry, you do not have permission to view that page.</span>
         <!-- 403 Forbidden -->
         <span *ngSwitchCase="'403'">Sorry, you do not have permission to view that page.</span>
         <!-- 404 Not Found -->
@@ -18,7 +20,8 @@
     <div>
       <span [ngSwitch]="route.snapshot.params['error']">
         <h6 *ngSwitchCase="'400'">400: Bad Request</h6>
-        <h6 *ngSwitchCase="'403'">403: Unauthorized</h6>
+        <h6 *ngSwitchCase="'401'">401: Unauthorized</h6>
+        <h6 *ngSwitchCase="'403'">403: Forbidden</h6>
         <h6 *ngSwitchCase="'404'">404: Page Not Found</h6>
         <h6 *ngSwitchCase="'410'">410: Gone</h6>
         <h6 *ngSwitchCase="'500'">500: Internal Server Error</h6>

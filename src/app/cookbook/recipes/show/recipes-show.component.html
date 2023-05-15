@@ -5,7 +5,7 @@
     </div>
     <div class="mt-3">
       <div class="container">
-        <div class="text-primary">
+        <div *ngIf="canEdit" class="text-primary">
           <label for="file-upload">
             <i class="fa fa-camera"></i> {{(recipe$|async)?.image_url ? 'Replace Image': 'Add image'}}
           </label>

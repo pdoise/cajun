@@ -4,7 +4,14 @@
       <h2 class="title-uppercase">My Cookbook</h2>
       <div class="owner2">
         <div class="avatar">
-          <img src="/assets/images/no-image.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+          <img *ngIf="(user$|async)?.image_url" [src]="(user$|async)?.image_url" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+          <img *ngIf="!(user$|async)?.image_url" src="/assets/images/no-image.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+          <div *ngIf="canEdit" class="text-primary">
+            <label for="file-upload">
+              <i class="fa fa-camera"></i> {{(user$|async)?.image_url ? 'Replace Image': 'Add image'}}
+            </label>
+            <input id="file-upload" accept=".png, .jpg, .jpeg" type="file" style="display:none" (change)="onFileSelected($event)">
+          </div>
           <h4>{{(user$|async)?.first}} {{(user$|async)?.last}}</h4>
           <h6 class="description">{{(user$|async)?.location}}</h6>
         </div>

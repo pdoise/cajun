@@ -53,7 +53,7 @@ export class RecipeShowComponent implements OnInit, OnDestroy {
 
   saveRecipe() {
     const formData = new FormData();
-    formData.append('recipe[user_id]', '1');
+    formData.append('recipe[user_id]', this.userId.toString());
     formData.append('recipe[image]', this.image);
     this.http.put(`${environment.API_URL}/users/${this.userId}/recipes/${this.recipeId}`, formData).subscribe(response => {
       this.store.dispatch(RecipeActions.getRecipe({userId: this.userId, recipeId: this.recipeId}));
