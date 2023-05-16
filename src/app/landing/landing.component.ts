@@ -21,7 +21,7 @@ export class LandingComponent implements OnInit {
   pageSize: number = 10;
 
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private store: Store,
     private router: Router,
     private route: ActivatedRoute,

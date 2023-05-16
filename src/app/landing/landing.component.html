@@ -10,7 +10,8 @@
           class="btn btn-outline-neutral btn-round">
           Search Recipes
         </button>
-        <button type="button"
+        <button *ngIf="!auth.isAuthenticated()"
+          type="button"
           class="btn btn-outline-neutral btn-round"
           [routerLink]="['/login']">
           Create Your Cookbook
@@ -44,7 +45,7 @@
       </div>
     </div>
 
-    <div class="section section-dark text-center">
+    <div class="section section-nude text-center">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-12">
@@ -53,7 +54,7 @@
               Welcome to Cajun Cookbook, the perfect place to share and discover new recipes. Create your very own recipe book, with the ability to rate and comment on other users' recipes. Whether you're looking for a classic jambalaya or a unique seafood gumbo, our community of passionate Cajuns has got you covered. Join us today and let's cook up some Cajun magic together!
             </h5>
             <br>
-            <button class="btn btn-primary btn-round">Get started</button>
+            <button *ngIf="!auth.isAuthenticated()" class="btn btn-primary btn-round">Get started</button>
           </div>
         </div>
         <br/><br/>
@@ -63,7 +64,7 @@
               <div class="description">
                 <h4 class="info-title">Build Your Own Cookbook</h4>
                 <p class="description">Create and customize your own cookbook filled with your favorite recipes. Save, organize, and access your recipes anytime, anywhere.</p>
-                <a class="btn btn-link btn-danger">Get started</a>
+                <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger">Get started</a>
               </div>
             </div>
           </div>
@@ -72,7 +73,7 @@
               <div class="description">
                 <h4 class="info-title">Share Your Recipes</h4>
                 <p> Share your recipes with a community of fellow cajun food enthusiasts. Get feedback, comments, and ratings on your recipes from other users. Discover new recipes and tips from other cajun cooks.</p>
-                <a class="btn btn-link btn-danger">Get started</a>
+                <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger">Get started</a>
               </div>
             </div>
               </div>
@@ -81,7 +82,7 @@
                   <div class="description">
                     <h4 class="info-title">Discover Authentic Cajun Flavors</h4>
                     <p>Explore a collection of authentic cajun recipes, from classic dishes to new and innovative creations. Filter and search recipes by ingredients, cuisine type, and dietary restrictions to find the perfect recipe for your taste.</p>
-                    <a class="btn btn-link btn-danger">Get started</a>
+                    <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger">Get started</a>
                   </div>
                 </div>
               </div>
@@ -90,7 +91,7 @@
                   <div class="description">
                     <h4 class="info-title">Connect with Others</h4>
                     <p>Join a community of cajun food lovers who share the same passion for this delicious cuisine. Get inspired, share stories, and make new friends who share your love for cajun cooking.</p>
-                    <a class="btn btn-link btn-danger">Get started</a>
+                    <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger">Get started</a>
                   </div>
                 </div>
               </div>

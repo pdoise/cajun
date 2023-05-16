@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth/auth.service';
-import { UserActions, RecipeActions } from '../state/app.actions';
+import { UserActions, AppFiltering } from '../state/app.actions';
 import { selectUser, selectRecipes, selectFilteredUserRecipes } from '../state/app.selector';
 import { User, Recipe } from 'src/app/app.models';
 
@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./cookbook.component.scss']
 })
 
-export class CookBookComponent implements OnInit {
+export class CookBookComponent implements OnInit, OnDestroy {
   user$: Observable<User> = this.store.select(selectUser);
   recipes$: Observable<Recipe[]> = this.store.select(selectRecipes);
   filteredRecipes$: Observable<Recipe[]> = this.store.select(selectFilteredUserRecipes);
@@ -34,6 +34,10 @@ export class CookBookComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(UserActions.getUser({userId: this.userId}));
     this.store.dispatch(UserActions.getUserRecipes({userId: this.userId}));
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(AppFiltering.resetFilters());
   }
 
   goCreateRecipe(): void {

@@ -4,3 +4,10 @@
     vertical-align: sub;
   }
 }
+
+@media screen and (max-width: 991px){
+  .profile-nav-item {
+    margin-top: -10px;
+    margin-left: -14px;
+  }
+}
