@@ -1,10 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
+import { ActionModalComponent, IActionModal } from 'src/app/shared/components/action-modal/action-modal.component';
 import { AppFiltering } from '../../../state/app.actions';
 import { RecipeActions } from '../../../state/app.actions';
 import { selectRecipe } from '../../../state/app.selector';
@@ -16,6 +18,7 @@ import { Recipe } from 'src/app/app.models';
 })
 
 export class RecipeFormComponent implements OnInit, OnDestroy {
+  @ViewChild('confirmDeleteModal') confirmDeleteModal: any;
   recipe$: Observable<Recipe> = this.store.select(selectRecipe);
   userId: number = this.route.snapshot.params['userId'];
   recipeId: number = this.route.snapshot.params['recipeId'];
@@ -26,6 +29,7 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
   private recipeSub!: Subscription;
 
   constructor(
+    private modalService: NgbModal,
     private store: Store,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -56,13 +60,31 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
     if (this.recipeSub) { this.recipeSub.unsubscribe(); }
   }
 
-  saveRecipe(): void {
+  saveRecipe() {
     if (this.isEdit) {
       this.store.dispatch(RecipeActions.updateRecipe({ recipe: this.form.getRawValue(), userId: this.userId, recipeId: this.recipe.id }));
     } else {
       this.store.dispatch(RecipeActions.createRecipe({ recipe: this.form.getRawValue(), userId: this.userId, }));
     }
     this.router.navigate([`/cookbook/${this.userId}`]);
+  }
+
+  deleteRecipe() {
+    const modal = this.modalService.open(ActionModalComponent);
+    let schema: IActionModal = {
+      title: 'Delete Recipe',
+      icon: 'fas fa-trash-alt',
+      content: `Are you sure you want to delete <strong>${this.recipe.name}</strong>?`,
+      theme: 'primary',
+      action: 'Delete'
+    }
+    modal.componentInstance.name = this.recipe.name;
+    modal.componentInstance.schema = schema;
+    modal.result.then((result) => {
+      if (result.action == 'confirm') {
+        this.store.dispatch(RecipeActions.deleteRecipe({ userId: this.userId, recipeId: this.recipeId})); }
+        this.router.navigate([`/cookbook/${this.userId}`]);
+    });
   }
 
   cancel() {

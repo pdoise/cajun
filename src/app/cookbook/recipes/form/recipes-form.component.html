@@ -1,11 +1,12 @@
 <app-primary-layout>
-  <div class="container section">
+  <div class="container section px-3">
     <form [formGroup]="form">
       <div class="row mb-3">
         <div class="col-md-12">
           <label>Name</label>
           <input type="text"
             class="form-control"
+            [maxlength]="100"
             placeholder="Name"
             formControlName="name">
         </div>
@@ -15,6 +16,7 @@
           <label>Description</label>
           <input type="text"
              class="form-control"
+             [maxlength]="500"
              placeholder="Write a small description of what this recipe is, its origin, or what it means to you."
              formControlName="description">
         </div>
@@ -25,6 +27,7 @@
           <div>
             <textarea class="form-control"
               rows="6"
+              [maxlength]="5000"
               placeholder="Ingredients"
               formControlName="ingredients">
             </textarea>
@@ -37,6 +40,7 @@
           <div>
             <textarea class="form-control"
               rows="6"
+              [maxlength]="5000"
               placeholder="Directions"
               formControlName="directions">
             </textarea>
@@ -46,61 +50,16 @@
     </form>
   </div>
   <div class="d-flex justify-content-center mt-3">
-    <button class="btn btn-outline-primary btn-round"
-      (click)="saveRecipe()">
+    <button class="btn btn-outline-primary btn-round" (click)="saveRecipe()">
       <i class="fa fa-cog"></i>
       Save Recipe
     </button>
   </div>
+  <div *ngIf="isEdit" class="d-flex justify-content-center mt-5">
+    <div class="text-primary pointer ml-3" (click)="deleteRecipe()">
+      <i class="fas fa-trash-alt"></i>
+      Delete Recipe
+    </div>
+  </div>
 </app-primary-layout>
 
-<!-- <app-trowser-layout
-  header="{{recipe.name || 'Create Recipe'}}"
-  (cancel)="cancel()">
-  <div content>
-    <form *ngIf="recipe" [formGroup]="form">
-      <div class="form-group" class="mb-3">
-        <label class="form-label">Name</label>
-        <input type="text"
-          name="name"
-          formControlName="name"
-          class="form-control">
-      </div>
-      <div class="form-group" class="mb-3">
-        <label class="form-label">Description</label>
-        <input type="text"
-          name="description"
-          formControlName="description"
-          [maxlength]="500"
-          class="form-control">
-        <div class="form-text">Write a small description of what this recipe is, its origin, or what it means to you.</div>
-      </div>
-      <div class="form-group" class="mb-3">
-        <label class="form-label">Ingredients</label>
-        <textarea type="text"
-          name="ingredients"
-          formControlName="ingredients"
-          [maxlength]="5000"
-          class="form-control"
-          rows="10">
-        </textarea>
-      </div>
-      <div class="form-group" class="mb-3">
-        <label class="form-label">Directions</label>
-        <textarea type="text"
-          name="directions"
-          formControlName="directions"
-          [maxlength]="5000"
-          class="form-control"
-          rows="10">
-        </textarea>
-      </div>
-    </form>
-  </div>
-  <div actions>
-    <button class="btn btn-outline-light"
-      (click)="saveRecipe()"
-      [disabled]="formInvalid">Submit
-    </button>
-  </div>
-</app-trowser-layout> -->
