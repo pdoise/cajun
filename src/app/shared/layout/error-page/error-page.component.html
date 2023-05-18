@@ -1,20 +1,16 @@
 <app-primary-layout>
-  <div class="container mb-5">
+  <div class="container mb-5 text-center">
     <h1 class="inline-icon">
       <i class="fas fa-exclamation-triangle me-3 text-primary"></i>
       <span [ngSwitch]="route.snapshot.params['error']">
         <!-- 400 Bad Request -->
         <span *ngSwitchCase="'400'">Sorry, the server cannot process that request.</span>
-        <!-- 401 Unauthorized -->
         <span *ngSwitchCase="'401'">Sorry, you do not have permission to view that page.</span>
-        <!-- 403 Forbidden -->
         <span *ngSwitchCase="'403'">Sorry, you do not have permission to view that page.</span>
-        <!-- 404 Not Found -->
         <span *ngSwitchCase="'404'">The page you are looking for does not exist. Please check the URL and try again.</span>
-        <!-- 410 Gone -->
         <span *ngSwitchCase="'410'">The record you're looking for has been deleted.</span>
-        <!-- 500 Error -->
         <span *ngSwitchCase="'500'">An unexpected error has occured.</span>
+        <span *ngSwitchCase="'503'">Sorry, the site is down for maintenance.</span>
       </span>
     </h1>
     <div>
@@ -25,6 +21,7 @@
         <h6 *ngSwitchCase="'404'">404: Page Not Found</h6>
         <h6 *ngSwitchCase="'410'">410: Gone</h6>
         <h6 *ngSwitchCase="'500'">500: Internal Server Error</h6>
+        <h6 *ngSwitchCase="'503'">503: Service Unavailable</h6>
       </span>
     </div>
   </div>
