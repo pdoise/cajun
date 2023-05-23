@@ -1,0 +1,50 @@
+<app-primary-layout>
+  <div class="section">
+    <div class="container">
+      <div class="row following">
+        <div class="col-md-12 text-center">
+          <ul class="list-unstyled">
+            <ng-container *ngFor="let recipe of (filteredRecipes$ | async) | slice: (page - 1) * pageSize : page * pageSize;" (click)="goRecipe(recipe)">
+              <li class="border-bottom">
+                <div class="row align-items-center">
+                  <div class="col-md-2 col-sm-2 ml-auto mr-auto">
+                    <img *ngIf="recipe.image_url" class="card-img-table img-circle img-no-padding img-responsive" [src]="recipe.image_url" alt="Recipe Image" width="100" height="70">
+                    <img *ngIf="!recipe.image_url" class="card-img-table img-circle img-no-padding img-responsive" src="/assets/images/no-image.png" alt="No Image" width="100" height="70">
+                  </div>
+                  <div class="col-md-7 col-sm-4 ml-auto">
+                    <h6>
+                      <span (click)="goRecipe(recipe)"
+                        class="text-primary pointer">
+                        {{ recipe.name }}
+                      </span><br/>
+                      <small>{{ recipe.description }}</small>
+                    </h6>
+                  </div>
+                  <div class="col-md-3 col-sm-2 ml-auto mr-auto">
+                    <h6 (click)="goUser(recipe)"
+                      class="text-primary pointer">
+                      {{ recipe.user?.first }} {{ recipe.user?.last }}
+                    </h6>
+                  </div>
+                </div>
+              </li>
+              <hr>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-11 text-center">
+          <pagination
+            [records]="recipes$"
+            [filteredRecords]="filteredRecipes$"
+            label="Total Recipes"
+            [page]="page"
+            [pageSize]="pageSize"
+            (pageChanged)="page = $event">
+          </pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-primary-layout>

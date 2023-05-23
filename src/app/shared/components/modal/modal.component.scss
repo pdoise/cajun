@@ -1,0 +1,35 @@
+.modal {
+  text-align: center;
+
+  .modal-header {
+    min-height: 55px !important;
+    padding: 10px !important;
+  }
+
+  .modal-hero {
+
+    .modal-hero-icon {
+      top: 0;
+      font-size: 50px;
+      display: block;
+      margin: 0 auto;
+    }
+    .modal-hero-text {
+      min-height: 80px;
+      margin-top: 10px;
+      padding: 0 20px;
+      display: block;
+    }
+    .modal-hero-header {
+      display: block;
+      font-size: 18px;
+      line-height:23px;
+      margin-bottom:20px;
+    }
+    .modal-hero-detail {
+      font-size: 14px;
+      line-height: 16px;
+      display: block;
+    }
+  }
+}

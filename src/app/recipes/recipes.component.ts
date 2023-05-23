@@ -6,17 +6,17 @@ import { Store } from '@ngrx/store';
 import { AuthService } from '../auth/auth.service';
 import { RecipeActions } from '../state/app.actions';
 import { selectRecipes, selectFilteredRecipes } from '../state/app.selector';
-import { Recipe } from 'src/app/app.models';
+import { User, Recipe } from 'src/app/app.models';
 
 @Component({
-    selector: 'app-landing',
-    templateUrl: './landing.component.html',
-    styleUrls: ['./landing.component.scss']
+  templateUrl: './recipes.component.html',
+  styleUrls: ['./recipes.component.scss']
 })
-
-export class LandingComponent implements OnInit {
+export class RecipesComponent implements OnInit {
   recipes$: Observable<Recipe[]> = this.store.select(selectRecipes);
   filteredRecipes$: Observable<Recipe[]> = this.store.select(selectFilteredRecipes);
+  page: number = 1;
+  pageSize: number = 20;
 
   constructor(
     public auth: AuthService,
@@ -25,8 +25,12 @@ export class LandingComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.store.dispatch(RecipeActions.getRecipes());
+  }
+
+  goUser(recipe: Recipe): void {
+    this.router.navigate([`/cookbook/${recipe.user_id}`]);
   }
 
   goRecipe(recipe: Recipe): void {

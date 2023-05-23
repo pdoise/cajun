@@ -1,17 +1,15 @@
-<div class="action-modal">
-  <div class="modal-body px-md-5">
-    <i class="fa fa-times" (click)="cancel()"></i>
-    <div class="content mt-4">
-      <div class="row text-{{schema.theme}}">
-        <h6 class="content text-center" [innerHtml]="schema.content"></h6>
-        <p *ngIf="schema.subText" class="content text-center pt-3" [innerHtml]="schema.subText"></p>
-      </div>
+<div class="modal-body px-md-5">
+  <i class="fa fa-times" (click)="cancel()"></i>
+  <div class="content mt-4">
+    <div class="row text-{{schema.theme}}">
+      <h6 class="content text-center" [innerHtml]="schema.content"></h6>
+      <p *ngIf="schema.subText" class="content text-center pt-3" [innerHtml]="schema.subText"></p>
     </div>
   </div>
-  <div class="d-flex justify-content-center mb-3">
-    <button type="button" class="btn btn-{{schema.theme}} btn-round" (click)="confirm()">
-      <i class="{{schema.icon}}"></i>
-      {{schema.action}}
-    </button>
-  </div>
+</div>
+<div class="d-flex justify-content-center mb-3">
+  <button type="button" class="btn btn-{{schema.theme}} btn-round" (click)="confirm()">
+    <i class="{{schema.icon}}"></i>
+    {{schema.action}}
+  </button>
 </div>

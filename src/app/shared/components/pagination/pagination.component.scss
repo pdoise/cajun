@@ -1,34 +1,11 @@
-.pagination-wrapper .pagination-link.active {
-  background-color: #B83621 !important;
-  border-color: #B83621 !important;
+.next-link,
+.prev-link {
+  color: #a51c30;
 }
 
-.pagination-wrapper .pagination-link {
-  color: #B83621 !important;
-  border-color: #B83621 !important;
-}
-
-.pagination-wrapper .pagination-link:hover:not(.disabled) {
-  color: #fff;
-  background-color: #B83621 !important;
-  border-color: #B83621 !important;
-}
-
-.pagination-wrapper .pagination-count {
-  color: #B83621 !important;
-}
-
-.pagination-wrapper .pagination .page-link {
-  color: #B83621 !important;
-}
-
-.pagination-wrapper .pagination .page-item.active .page-link {
-  background-color: #B83621 !important;
-  border-color: #B83621 !important;
-}
-
-.pagination-wrapper .pagination .page-item .page-link:hover {
-  background-color: #B83621 !important;
-  border-color: #B83621 !important;
-  color: #fff !important;
+.next-link.disabled,
+.prev-link.disabled {
+  color: #ccc;
+  pointer-events: none;
+  cursor: not-allowed;
 }

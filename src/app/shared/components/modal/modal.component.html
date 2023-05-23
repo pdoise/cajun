@@ -1,0 +1,20 @@
+<div class="modal">
+
+  <div class="modal-header">
+    <ng-content select="[modal-header]"></ng-content>
+  </div>
+
+  <div class="modal-body">
+    <ng-content select="[modal-body]"></ng-content>
+  </div>
+
+  <div class="modal-footer justify-content-between">
+    <div class="modal-secondary-actions">
+      <ng-content select="[modal-secondary-actions]"></ng-content>
+    </div>
+    <div class="modal-primary-actions">
+      <ng-content select="[modal-primary-actions]"></ng-content>
+    </div>
+  </div>
+
+</div>

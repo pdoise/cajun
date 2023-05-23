@@ -22,7 +22,6 @@ export class ActionModalComponent {
 }
 
 export interface IActionModal {
-  title: string;
   subText?: string;
   icon?: string;
   content: string;

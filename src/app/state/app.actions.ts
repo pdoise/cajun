@@ -13,6 +13,10 @@ export const AppAuth = createActionGroup({
     'Create Session': emptyProps(),
     'Create Session Success': props<{ response: any }>(),
     'Destroy Session': emptyProps(),
+    'Forgot Password': props<{ email: any }>(),
+    'Forgot Password Success': props<{ response: any }>(),
+    'Reset Password': props<{ resetToken: string, password: string, confirmPassword: string }>(),
+    'Reset Password Success': props<{ response: any }>(),
   },
 });
 

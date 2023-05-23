@@ -21,7 +21,10 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { RecipeShowComponent } from './cookbook/recipes/show/recipes-show.component';
 import { RecipeFormComponent } from './cookbook/recipes/form/recipes-form.component';
+import { ResetPasswordModalComponent } from './login/reset-password-modal/reset-password-modal.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { SignupComponent } from './signup/signup.component';
+import { RecipesComponent } from './recipes/recipes.component';
 
 import { CustomHttpInterceptor } from './core/http.interceptor';
 
@@ -33,7 +36,10 @@ import { CustomHttpInterceptor } from './core/http.interceptor';
     LoginComponent,
     RecipeShowComponent,
     RecipeFormComponent,
+    ResetPasswordModalComponent,
+    PasswordResetComponent,
     SignupComponent,
+    RecipesComponent,
   ],
   imports: [
     FormsModule,

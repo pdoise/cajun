@@ -6,7 +6,7 @@ import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { Recipe, User } from '../app.models';
-import { UserActions, RecipeActions } from './app.actions';
+import { AppAuth, UserActions, RecipeActions } from './app.actions';
 
 import { environment } from 'src/environments/environment';
 
@@ -28,6 +28,29 @@ export class AppEffects {
       return this.http.get<User>(`${this.usersURl}/${action.userId}`).pipe(
         map((user: User) => {
           return UserActions.getUserSuccess({user})
+        })
+      )
+    })
+  ));
+
+  forgotPassword$ = createEffect(() => this.actions$.pipe(
+    ofType(AppAuth.forgotPassword),
+    switchMap((action) => {
+      return this.http.post<any>(`${environment.API_URL}/password_resets`, { email: action.email }).pipe(
+        map((response: any) => {
+          this.router.navigate([`/password_reset`]);
+          return AppAuth.forgotPasswordSuccess({response});
+        })
+      )
+    })
+  ));
+
+  resetPassword$ = createEffect(() => this.actions$.pipe(
+    ofType(AppAuth.resetPassword),
+    switchMap((action) => {
+      return this.http.put<any>(`${environment.API_URL}/password_resets/${action.resetToken}`, { password: action.password, password_confirmation: action.confirmPassword}).pipe(
+        map((response: any) => {
+          return AppAuth.resetPasswordSuccess({response});
         })
       )
     })

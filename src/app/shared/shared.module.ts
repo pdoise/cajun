@@ -11,6 +11,7 @@ import { PrimaryLayoutComponent } from './layout/primary-layout/primary-layout.c
 import { TrowserLayoutComponent } from './layout/trowser-layout/trowser-layout.component';
 
 import { ActionModalComponent } from './components/action-modal/action-modal.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { TextFilterComponent } from './components/text-filter/text-filter.component';
 
@@ -20,6 +21,7 @@ import { WhitelistKeysPipe } from './pipes/whitelist-keys.pipe';
 const components = [
   ErrorPageComponent,
   ActionModalComponent,
+  ModalComponent,
   PaginationComponent,
   TextFilterComponent,
   NavbarComponent,

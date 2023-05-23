@@ -26,8 +26,13 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       });
       return next.handle(authReq).pipe(
         catchError((error: HttpErrorResponse) => {
-          this.router.navigate([`error/${error.status}`]);
-          return throwError(() => new Error('An error has occured; please try again later.'));
+          if (error.status == 401) {
+            this.auth.logout();
+            return throwError(() => new Error('Session not valid.'));
+          } else {
+            this.router.navigate([`error/${error.status}`]);
+            return throwError(() => new Error('An error has occured; please try again later.'));
+          }
         })
       );
     } else {

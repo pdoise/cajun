@@ -20,5 +20,6 @@ export class User {
   email!: string;
   avatar?: string | null;
   location?: string;
+  bio?: string;
   image_url?: string;
 }

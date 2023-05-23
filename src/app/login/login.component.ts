@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { firstValueFrom } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { AuthService } from '../auth/auth.service';
+import { AppAuth } from '../state/app.actions';
+import { ResetPasswordModalComponent } from './reset-password-modal/reset-password-modal.component';
 
 @Component({
   templateUrl: './login.component.html',
@@ -14,7 +18,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private formBuilder: FormBuilder
+    private store: Store,
+    private formBuilder: FormBuilder,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -30,6 +36,16 @@ export class LoginComponent implements OnInit {
     },
     (error) => {
       this.errorMessage = error.error.error_message
+    });
+  }
+
+  forgotPassword() {
+    let modal = this.modalService.open(ResetPasswordModalComponent, { centered: true }) ;
+    modal.result.then((result) => {
+      if (result.action == 'confirm') {
+        //this.router
+        //this.store.dispatch(AppAuth.forgotPassword({ email: result.email}));
+      }
     });
   }
 

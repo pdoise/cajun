@@ -14,16 +14,24 @@
             </label>
             <input id="file-upload" accept=".png, .jpg, .jpeg" type="file" style="display:none" (change)="onFileSelected($event)">
           </div>
-          <h4>{{(user$|async)?.first}} {{(user$|async)?.last}}</h4>
+        </div>
+        <div class="name">
+          <h4 class="title">{{(user$|async)?.first}} {{(user$|async)?.last}}<br /></h4>
           <h6 class="description">{{(user$|async)?.location}}</h6>
         </div>
       </div>
-      <button *ngIf="canEdit"
-        class="btn btn-primary btn-round mb-3"
-        (click)="goCreateRecipe()">
-        <i class="fa fa-cog"></i>
-        Add Recipe
-      </button>
+      <div class="row">
+        <div class="col-md-12 ml-auto mr-auto text-center">
+          <p>{{(user$|async)?.bio}}</p>
+          <br />
+          <button *ngIf="canEdit"
+            class="btn btn-outline-primary btn-round mb-3"
+            (click)="goCreateRecipe()">
+            <i class="fa fa-cog"></i>
+            Add Recipe
+          </button>
+        </div>
+      </div>
       <app-text-filter></app-text-filter>
     </div>
   </div>

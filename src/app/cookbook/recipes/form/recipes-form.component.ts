@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,7 +18,6 @@ import { Recipe } from 'src/app/app.models';
 })
 
 export class RecipeFormComponent implements OnInit, OnDestroy {
-  @ViewChild('confirmDeleteModal') confirmDeleteModal: any;
   recipe$: Observable<Recipe> = this.store.select(selectRecipe);
   userId: number = this.route.snapshot.params['userId'];
   recipeId: number = this.route.snapshot.params['recipeId'];
@@ -50,7 +49,7 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
         description: [this.recipe.description || ''],
         ingredients: [this.recipe.ingredients || ''],
         directions: [this.recipe.directions || ''],
-        user_id: 1
+        user_id: this.userId
       });
     })
   }
@@ -72,7 +71,6 @@ export class RecipeFormComponent implements OnInit, OnDestroy {
   deleteRecipe() {
     const modal = this.modalService.open(ActionModalComponent);
     let schema: IActionModal = {
-      title: 'Delete Recipe',
       icon: 'fas fa-trash-alt',
       content: `Are you sure you want to delete <strong>${this.recipe.name}</strong>?`,
       theme: 'primary',
