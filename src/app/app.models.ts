@@ -4,13 +4,13 @@ export class Recipe {
   description!: string;
   ingredients!: string;
   directions!: string;
-  img_src!: string | null;
-  imgsrc!: string | null;
-  cook_time!: number | null;
   user!: User | null;
   user_id!: number;
   image!: any;
   image_url?: string;
+  like_count!: number;
+  liking_users_ids!: Array<number>;
+  liking_users_names!: Array<string>;
 }
 
 export class User {

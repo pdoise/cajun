@@ -134,47 +134,4 @@
         </div>
       </div>
     </div>
-
-  <!--
-
-  <section *ngIf="(filteredRecipes$|async)?.length">
-    <h3 class="fw-light app-primary mt-5">All Recipes</h3>
-    <div class="row py-4 bg-light">
-      <div class="app-table">
-        <table class="table table-hover bg-white">
-          <colgroup>
-            <col width="5%">
-            <col width="35%">
-            <col width="45%">
-            <col width="15%">
-          </colgroup>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Contributor</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let recipe of (filteredRecipes$|async) | slice: (page-1) * pageSize : page * pageSize;" (click)="goRecipe(recipe)">
-              <td *ngIf="recipe.image_url"><img class="card-img-table" [src]="recipe.image_url"></td>
-              <td *ngIf="!recipe.image_url"><img class="card-img-table" src="/assets/images/no-image.png"></td>
-              <td>{{recipe.name}}</td>
-              <td>{{recipe.description}}</td>
-              <td>{{recipe.user?.first}} {{recipe.user?.last}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination
-          [records]="recipes$"
-          [filteredRecords]="filteredRecipes$"
-          label="Total Recipes"
-          [page]="page"
-          [pageSize]="pageSize"
-          (pageChanged)="page = $event">
-        </pagination>
-      </div>
-    </div>
-  </section> -->
 </app-primary-layout>

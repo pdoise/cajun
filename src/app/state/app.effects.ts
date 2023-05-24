@@ -128,4 +128,29 @@ export class AppEffects {
       )
     })
   ));
+
+  likeRecipe$ = createEffect(() => this.actions$.pipe(
+    ofType(RecipeActions.likeRecipe),
+    switchMap((action) => {
+      return this.http.post<any>(`${this.usersURl}/${action.userId}/recipes/${action.recipeId}/like`, {recipeId: action.recipeId}).pipe(
+        map((response: any) => {
+          this.store.dispatch(RecipeActions.getRecipe({userId: action.userId, recipeId: action.recipeId}));
+          return RecipeActions.likeRecipeSuccess();
+        })
+      )
+    })
+  ));
+
+  unlikeRecipe$ = createEffect(() => this.actions$.pipe(
+    ofType(RecipeActions.unlikeRecipe),
+    switchMap((action) => {
+      return this.http.delete<any>(`${this.usersURl}/${action.userId}/recipes/${action.recipeId}/unlike`).pipe(
+        map((response: any) => {
+          this.store.dispatch(RecipeActions.getRecipe({userId: action.userId, recipeId: action.recipeId}));
+          return RecipeActions.unlikeRecipeSuccess();
+        })
+      )
+    })
+  ));
+
 }

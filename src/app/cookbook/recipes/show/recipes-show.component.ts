@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from 'src/app/auth/auth.service';
@@ -17,17 +17,15 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./recipes-show.component.scss']
 })
 
-export class RecipeShowComponent implements OnInit, OnDestroy {
+export class RecipeShowComponent implements OnInit {
   recipe$: Observable<Recipe> = this.store.select(selectRecipe);
   userId: number = this.route.snapshot.params['userId'];
   recipeId: number = this.route.snapshot.params['recipeId'];
   form!: FormGroup;
   image!: File;
-  imageUrl!: string;
-  recipeSub!: Subscription;
 
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private store: Store,
@@ -37,13 +35,6 @@ export class RecipeShowComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(RecipeActions.getRecipe({userId: this.userId, recipeId: this.recipeId}));
-    this.recipeSub = this.recipe$.subscribe((recipe) => {
-      this.imageUrl = recipe.image_url ? recipe.image_url : '/assets/images/no-image.png';
-    })
-  }
-
-  ngOnDestroy() {
-    if (this.recipeSub) { this.recipeSub.unsubscribe() }
   }
 
   onFileSelected(event: any) {
@@ -64,6 +55,19 @@ export class RecipeShowComponent implements OnInit, OnDestroy {
     this.router.navigate([`cookbook/${this.userId}/recipe/${this.recipeId}/edit`]);
   }
 
+  toggleLike() {
+    this.recipe$.pipe(take(1)).subscribe(recipe => {
+      if (this.canLike(recipe)) {
+        if (recipe.liking_users_ids.includes(this.auth.getCurrentUser()?.id)) {
+          this.store.dispatch(RecipeActions.unlikeRecipe({ userId: this.userId, recipeId: this.recipeId }));
+        } else {
+          this.store.dispatch(RecipeActions.likeRecipe({ userId: this.userId, recipeId: this.recipeId }));
+        }
+      }
+    });
+  }
+
+  canLike(recipe: Recipe): boolean { return !!(this.auth.getCurrentUser().id != recipe.user_id) }
   get canEdit(): boolean { return !!(this.auth.getCurrentUser()?.id == this.userId) }
 
 }

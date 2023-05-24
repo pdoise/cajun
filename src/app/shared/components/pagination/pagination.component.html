@@ -1,4 +1,5 @@
 <div class="pagination-wrapper nav-pills-primary" *ngIf="collectionSize > 0">
+  <div class="pagination-count">{{collectionSize}} {{ label }}</div>
   <ngb-pagination
     class="pagination d-flex justify-content-center"
     [(page)]="page"
@@ -22,5 +23,4 @@
       </span>
     </ng-template>
   </ngb-pagination>
-  <div class="pagination-count">{{collectionSize}} {{ label }}</div>
 </div>

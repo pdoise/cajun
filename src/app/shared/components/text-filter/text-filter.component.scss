@@ -8,10 +8,12 @@
     position: absolute;
     right: 10px;
     margin-top: -27px;
+    color: #a51c30;
   }
 
-  .hstm-text-filter-clear {
+  .text-filter-clear {
     cursor: pointer;
     pointer-events: auto !important;
+    margin-top: -45px !important;
   }
 }

@@ -61,5 +61,11 @@ export const RecipeActions = createActionGroup({
 
     'Delete Recipe': props<{ userId: number, recipeId: number }>(),
     'Delete Recipe Success': emptyProps(),
+
+    'Like Recipe': props<{ userId: number, recipeId: number }>(),
+    'Like Recipe Success': emptyProps(),
+
+    'Unlike Recipe': props<{ userId: number, recipeId: number }>(),
+    'Unlike Recipe Success': emptyProps(),
   },
 });
