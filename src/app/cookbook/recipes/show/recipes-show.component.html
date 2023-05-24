@@ -12,7 +12,7 @@
           <input id="file-upload" accept=".png, .jpg, .jpeg" type="file" style="display:none" (change)="onFileSelected($event)">
         </span>
         <span class="float-end" ngbTooltip="{{(recipe$|async)?.liking_users_names}}">
-          <i [ngClass]="{'text-primary && pointer': (recipe$|async)?.user_id != auth.getCurrentUser().id}"
+          <i [ngClass]="{'text-primary && pointer': (recipe$|async)?.user_id != auth.getCurrentUser()?.id}"
             (click)="toggleLike()"
             class="fa fa-thumbs-up pe-1">
           </i>

@@ -67,7 +67,7 @@ export class RecipeShowComponent implements OnInit {
     });
   }
 
-  canLike(recipe: Recipe): boolean { return !!(this.auth.getCurrentUser().id != recipe.user_id) }
+  canLike(recipe: Recipe): boolean { return !!(this.auth.getCurrentUser()?.id != recipe.user_id) }
   get canEdit(): boolean { return !!(this.auth.getCurrentUser()?.id == this.userId) }
 
 }

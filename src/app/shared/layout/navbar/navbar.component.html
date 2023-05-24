@@ -39,7 +39,7 @@
         </li>
         <ng-container *ngIf="auth.isAuthenticated()">
           <li class="nav-item">
-            <a [routerLink]="['/cookbook/' + auth.getCurrentUser().id]"
+            <a [routerLink]="['/cookbook/' + auth.getCurrentUser()?.id]"
               class="nav-link">
               <i class="fa fa-book"></i>
               <p>My Cookbook</p>
