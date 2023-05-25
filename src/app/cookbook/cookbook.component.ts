@@ -61,5 +61,5 @@ export class CookBookComponent implements OnInit, OnDestroy {
     })
   }
 
-  get canEdit(): boolean { return !!(this.auth.getCurrentUser()?.id == this.userId) }
+  get isOwner(): boolean { return !!(this.auth.getCurrentUser()?.id == this.userId) }
 }

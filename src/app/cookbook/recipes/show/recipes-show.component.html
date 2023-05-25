@@ -2,21 +2,28 @@
   <div class="wrapper">
     <div class="page-header page-header-xs" [style.background-image]="'url(' + ((recipe$ | async)?.image_url ? (recipe$ | async)?.image_url : '/assets/images/no-image.png' ) + ')'">
       <div class="filter"></div>
+      <button class="btn btn-outline-white btn-round back-button" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
     </div>
     <div class="mt-3">
       <div class="container">
-        <span *ngIf="canEdit" class="text-primary">
+        <span *ngIf="isOwner(recipe$ | async)" class="text-primary">
           <label for="file-upload">
             <i class="fa fa-camera"></i> {{(recipe$|async)?.image_url ? 'Replace Image': 'Add image'}}
           </label>
           <input id="file-upload" accept=".png, .jpg, .jpeg" type="file" style="display:none" (change)="onFileSelected($event)">
         </span>
-        <span class="float-end" ngbTooltip="{{(recipe$|async)?.liking_users_names}}">
-          <i [ngClass]="{'text-primary && pointer': (recipe$|async)?.user_id != auth.getCurrentUser()?.id}"
+        <span class="like-icon like float-end" ngbTooltip="{{(recipe$|async)?.liking_users_names}}">
+          <i [ngClass]="{
+            'text-primary pointer': !isOwner(recipe$ | async),
+            'fa': alreadyLiked(recipe$ | async),
+            'far': !alreadyLiked(recipe$ | async)
+          }"
             (click)="toggleLike()"
-            class="fa fa-thumbs-up pe-1">
+            class="fa-thumbs-up">
           </i>
-          <span>{{(recipe$|async)?.like_count}}</span>
+          <span>  {{(recipe$|async)?.like_count}}</span>
         </span>
         <div class="owner">
           <div class="name">
@@ -28,7 +35,7 @@
           <div class="col-md-8 ml-auto mr-auto text-center">
             <p>{{(recipe$|async)?.description}}</p>
             <br />
-            <button *ngIf="canEdit"
+            <button *ngIf="isOwner(recipe$ | async)"
               class="btn btn-outline-primary btn-round"
               (click)="goEditRecipe()">
               <i class="fa fa-cog"></i>
@@ -52,6 +59,40 @@
             </div>
           </div>
         </div>
+        <h4 class="text-primary">Comments</h4>
+
+        <div class="row following">
+          <div class="col-md-12 text-center">
+            <ul class="list-unstyled">
+              <ng-container>
+                <li class="border-bottom mb-3">
+                  <div class="row align-items-center">
+                    <div class="col-md-2 col-sm-2 ml-auto mr-auto">
+                    </div>
+                    <div class="col-md-8 col-sm-4 ml-auto">
+                      <h6>
+                        <span
+                          class="text-primary pointer">
+                          <!-- {{ comment }} -->
+                        </span>
+                        <br/>
+                      </h6>
+                    </div>
+                    <div class="col-md-2 col-sm-2 ml-auto mr-auto">
+                      <!-- <small>Contributor</small>
+                      <h6 (click)="goUser(recipe)"
+                        class="text-primary pointer">
+                        {{ recipe.user?.first }} {{ recipe.user?.last }}
+                      </h6> -->
+                    </div>
+                  </div>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>

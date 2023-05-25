@@ -18,19 +18,25 @@
               <li class="border-bottom mb-3">
                 <div class="row align-items-center">
                   <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                    <img *ngIf="recipe.image_url" class="card-img-table img-circle img-no-padding img-responsive pointer" [src]="recipe.image_url" alt="Recipe Image" width="100" height="70" (click)="goRecipe(recipe)">
-                    <img *ngIf="!recipe.image_url" class="card-img-table img-circle img-no-padding img-responsive pointer" src="/assets/images/no-image.png" alt="No Image" width="100" height="70" (click)="goRecipe(recipe)">
+                    <img *ngIf="recipe.image_url" class="card-img-table img-thumbnail img-no-padding img-responsive pointer" [src]="recipe.image_url" alt="Recipe Image" width="100" height="70" (click)="goRecipe(recipe)">
+                    <img *ngIf="!recipe.image_url" class="card-img-table img-thumbnail img-no-padding img-responsive pointer" src="/assets/images/no-image.png" alt="No Image" width="100" height="70" (click)="goRecipe(recipe)">
                   </div>
                   <div class="col-md-8 col-sm-4 ml-auto">
                     <h6>
+                      <span class="like-icon like float-start" ngbTooltip="{{recipe.liking_users_names}}">
+                        <i class="fa fa-thumbs-up"></i>
+                        <span>  {{recipe.like_count}}</span>
+                      </span>
                       <span (click)="goRecipe(recipe)"
                         class="text-primary pointer">
                         {{ recipe.name }}
-                      </span><br/>
+                      </span>
+                      <br/>
                       <small>{{ recipe.description }}</small>
                     </h6>
                   </div>
                   <div class="col-md-2 col-sm-2 ml-auto mr-auto">
+                    <small>Contributor</small>
                     <h6 (click)="goUser(recipe)"
                       class="text-primary pointer">
                       {{ recipe.user?.first }} {{ recipe.user?.last }}
@@ -42,14 +48,16 @@
           </ul>
         </div>
       </div>
-      <pagination
-        [records]="recipes$"
-        [filteredRecords]="filteredRecipes$"
-        label="Total Recipes"
-        [page]="page"
-        [pageSize]="pageSize"
-        (pageChanged)="page = $event">
-      </pagination>
+      <div class="ms-4">
+        <pagination
+          [records]="recipes$"
+          [filteredRecords]="filteredRecipes$"
+          label="Total Recipes"
+          [page]="page"
+          [pageSize]="pageSize"
+          (pageChanged)="page = $event">
+        </pagination>
+      </div>
     </div>
   </div>
 </app-primary-layout>

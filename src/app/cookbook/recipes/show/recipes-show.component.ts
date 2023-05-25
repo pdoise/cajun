@@ -57,8 +57,8 @@ export class RecipeShowComponent implements OnInit {
 
   toggleLike() {
     this.recipe$.pipe(take(1)).subscribe(recipe => {
-      if (this.canLike(recipe)) {
-        if (recipe.liking_users_ids.includes(this.auth.getCurrentUser()?.id)) {
+      if (!this.isOwner(recipe)) {
+        if (this.alreadyLiked(recipe)) {
           this.store.dispatch(RecipeActions.unlikeRecipe({ userId: this.userId, recipeId: this.recipeId }));
         } else {
           this.store.dispatch(RecipeActions.likeRecipe({ userId: this.userId, recipeId: this.recipeId }));
@@ -67,7 +67,11 @@ export class RecipeShowComponent implements OnInit {
     });
   }
 
-  canLike(recipe: Recipe): boolean { return !!(this.auth.getCurrentUser()?.id != recipe.user_id) }
-  get canEdit(): boolean { return !!(this.auth.getCurrentUser()?.id == this.userId) }
+  goBack() {
+    this.router.navigate([`cookbook/${this.userId}`])
+  }
+
+  alreadyLiked(recipe: Recipe | null): boolean { return !!(recipe?.liking_users_ids?.includes(this.auth.getCurrentUser()?.id)) }
+  isOwner(recipe: Recipe | null): boolean { return !!((this.auth.getCurrentUser()?.id == recipe?.user_id) && this.auth.isAuthenticated()) }
 
 }
