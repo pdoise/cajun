@@ -23,24 +23,24 @@
                   </div>
                   <div class="col-md-8 col-sm-4 ml-auto">
                     <h6>
-                      <span class="like-icon like float-start" ngbTooltip="{{recipe.liking_users_names}}">
-                        <i class="fa fa-thumbs-up"></i>
-                        <span>  {{recipe.like_count}}</span>
-                      </span>
                       <span (click)="goRecipe(recipe)"
                         class="text-primary pointer">
                         {{ recipe.name }}
                       </span>
                       <br/>
                       <small>{{ recipe.description }}</small>
+                      <div class="like-icon like" ngbTooltip="{{recipe.liking_users_names}}">
+                        <i class="fa fa-thumbs-up"></i>
+                        <span>  {{recipe.like_count}}</span>
+                      </div>
                     </h6>
                   </div>
                   <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                    <small>Contributor</small>
                     <h6 (click)="goUser(recipe)"
                       class="text-primary pointer">
                       {{ recipe.user?.first }} {{ recipe.user?.last }}
                     </h6>
+                    <small>Contributor</small>
                   </div>
                 </div>
               </li>

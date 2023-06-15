@@ -119,7 +119,8 @@
      &:disabled,
      &[disabled],
      &.disabled{
-        @include opacity(.5);
+      color: $primary-color;
+      @include opacity(.5);
     }
 }
 .btn-link{

@@ -12,8 +12,8 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AppEffects {
-  private usersURl = environment.API_URL + '/users';
   private recipesURl = environment.API_URL + '/recipes';
+  private usersURl = environment.API_URL + '/users';
 
   constructor(
     private router: Router,
@@ -21,6 +21,17 @@ export class AppEffects {
     private store: Store,
     private http: HttpClient
   ) {}
+
+  getRecipes$ = createEffect(() => this.actions$.pipe(
+    ofType(RecipeActions.getRecipes),
+    mergeMap((action) => {
+      return this.http.get<Recipe[]>(this.recipesURl).pipe(
+        map((recipes: Recipe[]) => {
+          return RecipeActions.getRecipesSuccess({recipes})
+        })
+      )
+    })
+  ));
 
   getUser$ = createEffect(() => this.actions$.pipe(
     ofType(UserActions.getUser),
@@ -62,17 +73,6 @@ export class AppEffects {
       return this.http.get<Recipe[]>(`${this.usersURl}/${action.userId}/recipes`).pipe(
         map((recipes: Recipe[]) => {
           return UserActions.getUserRecipesSuccess({recipes})
-        })
-      )
-    })
-  ));
-
-  getRecipes$ = createEffect(() => this.actions$.pipe(
-    ofType(RecipeActions.getRecipes),
-    mergeMap((action) => {
-      return this.http.get<Recipe[]>(this.recipesURl).pipe(
-        map((recipes: Recipe[]) => {
-          return RecipeActions.getRecipesSuccess({recipes})
         })
       )
     })
@@ -124,6 +124,30 @@ export class AppEffects {
         map(() => {
           this.store.dispatch(RecipeActions.getRecipes());
           return RecipeActions.deleteRecipeSuccess();
+        })
+      )
+    })
+  ));
+
+  addComment$ = createEffect(() => this.actions$.pipe(
+    ofType(RecipeActions.addComment),
+    switchMap((action) => {
+      return this.http.post<any>(`${this.usersURl}/${action.userId}/recipes/${action.recipeId}/comments`, {userId: action.userId, recipeId: action.recipeId, content: action.content}).pipe(
+        map((response: any) => {
+          this.store.dispatch(RecipeActions.getRecipe({userId: action.userId, recipeId: action.recipeId}));
+          return RecipeActions.addCommentSuccess();
+        })
+      )
+    })
+  ));
+
+  deleteComment$ = createEffect(() => this.actions$.pipe(
+    ofType(RecipeActions.deleteComment),
+    switchMap((action) => {
+      return this.http.delete<any>(`${this.usersURl}/${action.userId}/recipes/${action.recipeId}/comments/${action.commentId}`,).pipe(
+        map((response: any) => {
+          this.store.dispatch(RecipeActions.getRecipe({userId: action.userId, recipeId: action.recipeId}));
+          return RecipeActions.deleteCommentSuccess();
         })
       )
     })
