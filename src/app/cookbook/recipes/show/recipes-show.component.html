@@ -63,7 +63,7 @@
           <div class="col-md-12 text-center">
             <h4 class="text-primary mb-3">Comments</h4>
             <ul class="list-unstyled">
-              <ng-container *ngFor="let comment of (recipe$|async)?.comments">
+              <ng-container *ngFor="let comment of (recipe$|async)?.comments | slice: (page - 1) * pageSize : page * pageSize;">
                 <li class="border-bottom mb-3">
                   <div class="row align-items-center">
                     <div class="col-md-2 col-sm-2 ml-auto mr-auto">
@@ -86,23 +86,33 @@
                   </div>
                 </li>
               </ng-container>
+              <pagination
+                [records]="(recipe$|async)?.comments"
+                [filteredRecords]="(recipe$|async)?.comments"
+                label="Total Comments"
+                [page]="page"
+                [pageSize]="pageSize"
+                (pageChanged)="page = $event">
+              </pagination>
             </ul>
           </div>
         </div>
-        <div>
-          <textarea
-            class="form-control mb-3 "
-            maxlength="1000"
-            [(ngModel)]="comment"
-            style="min-height:150px">
-          </textarea>
-        </div>
-        <button class="btn btn-outline-primary btn-round mb-3"
-          (click)="addComment()"
-          [disabled]="!comment">
-          <i class="fa-solid fa-comment"></i>
-          Add Comment
-        </button>
+        <ng-container *ngIf="auth.isAuthenticated()">
+          <div>
+            <textarea
+              class="form-control mb-3 "
+              maxlength="1000"
+              [(ngModel)]="comment"
+              style="min-height:100px">
+            </textarea>
+          </div>
+          <button class="btn btn-outline-primary btn-round mb-3"
+            (click)="addComment()"
+            [disabled]="!comment">
+            <i class="fa-solid fa-comment"></i>
+            Add Comment
+          </button>
+        </ng-container>
       </div>
     </div>
   </div>

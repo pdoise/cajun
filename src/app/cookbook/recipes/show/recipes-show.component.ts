@@ -25,6 +25,9 @@ export class RecipeShowComponent implements OnInit {
   form!: FormGroup;
   image!: File;
   comment: string = '';
+  page: number = 1;
+  pageSize: number = 20;
+  recipe: any;
 
   constructor(
     public auth: AuthService,
@@ -60,6 +63,7 @@ export class RecipeShowComponent implements OnInit {
 
   toggleLike() {
     this.recipe$.pipe(take(1)).subscribe(recipe => {
+      this.recipe = recipe;
       if (!this.isOwner(recipe)) {
         if (this.alreadyLiked(recipe)) {
           this.store.dispatch(RecipeActions.unlikeRecipe({ userId: this.userId, recipeId: this.recipeId }));
