@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --disable-host-check",
     "dev": "ng build --configuration development",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@abacritt/angularx-social-login": "^2.1.0",
     "@angular/animations": "16.0.0",
     "@angular/common": "16.0.0",
     "@angular/compiler": "16.0.0",
@@ -25,6 +26,7 @@
     "@ngrx/effects": "16.0.0",
     "@ngrx/store": "16.0.0",
     "@popperjs/core": "^2.11.7",
+    "@types/facebook-js-sdk": "^3.3.6",
     "bootstrap": "5.2.3",
     "css-loader": "^6.7.3",
     "rxjs": "7.8.1",

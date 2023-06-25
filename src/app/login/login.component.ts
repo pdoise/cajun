@@ -4,9 +4,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { firstValueFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 
+import { SocialAuthService } from "@abacritt/angularx-social-login";
+import { FacebookLoginProvider } from "@abacritt/angularx-social-login";
+
 import { AuthService } from '../auth/auth.service';
-import { AppAuth } from '../state/app.actions';
 import { ResetPasswordModalComponent } from './reset-password-modal/reset-password-modal.component';
+declare const window: any;
 
 @Component({
   templateUrl: './login.component.html',
@@ -21,6 +24,7 @@ export class LoginComponent implements OnInit {
     private store: Store,
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
+    private socialAuthService: SocialAuthService
   ) { }
 
   ngOnInit() {
@@ -29,6 +33,22 @@ export class LoginComponent implements OnInit {
       password: ['']
     });
   }
+
+  signInWithFB(): void {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID)
+      .then((user: any) => {
+        console.log('Logged in with Facebook:', user);
+        // Perform further actions with the user data
+      })
+      .catch((error: any) => {
+        console.error('Error logging in with Facebook:', error);
+      });
+  }
+
+  signOut(): void {
+    this.socialAuthService.signOut();
+  }
+
 
   login() {
     firstValueFrom(this.auth.login(this.form.getRawValue())).then((response) => {

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
+declare const window: any;
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,17 @@ export class AuthService {
     );
   }
 
+  fbLogin(accessToken: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/fblogin`, {access_token: accessToken}).pipe(
+      tap((response: any) => {
+        console.log(response)
+        //localStorage.setItem('token', response.token);
+        //localStorage.setItem('currentUser', JSON.stringify(response.user));
+        //this.router.navigate([`/cookbook/${response.user.id}`]);
+      })
+    );
+  }
+
   signUp(user: any) {
     return this.http.post(`${this.baseUrl}/create`, {user: user}).pipe(
       tap((response: any) => {
@@ -38,6 +50,7 @@ export class AuthService {
   }
 
   logout() {
+    window.FB.logout();
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
     this.router.navigate(['/landing']);

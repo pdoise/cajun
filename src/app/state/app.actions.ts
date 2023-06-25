@@ -7,6 +7,8 @@ export const AppAuth = createActionGroup({
   events: {
     'Login': props<{ credentials: any }>(),
     'Login Success': props<{ response: any }>(),
+    'FB Login': props<{ accessToken: any }>(),
+    'FB Login Success': props<{ response: any }>(),
     'Login Error': props<{ error: any }>(),
     'Logout': emptyProps(),
     'Logout Success': props<{ response: any }>(),

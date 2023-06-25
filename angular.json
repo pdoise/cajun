@@ -76,6 +76,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "sslKey": "ssl-config.js"
+          },
           "configurations": {
             "production": {
               "browserTarget": "cajun:build:production"
