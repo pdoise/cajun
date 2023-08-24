@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { SocialAuthService } from "@abacritt/angularx-social-login";
-import { FacebookLoginProvider } from "@abacritt/angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "@abacritt/angularx-social-login";
 
 import { AuthService } from '../auth/auth.service';
 import { ResetPasswordModalComponent } from './reset-password-modal/reset-password-modal.component';
@@ -28,6 +28,9 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.socialAuthService.authState.subscribe((user) => {
+      console.log(user)
+    });
     this.form = this.formBuilder.group({
       email: [''],
       password: ['']

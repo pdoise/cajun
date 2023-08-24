@@ -58,6 +58,7 @@ export class CookBookComponent implements OnInit, OnDestroy {
     formData.append('user[image]', this.image);
     this.http.put(`${environment.API_URL}/users/${this.userId}`, formData).subscribe(response => {
       this.store.dispatch(UserActions.getUser({userId: this.userId}));
+      this.store.dispatch(UserActions.getUserRecipes({userId: this.userId}));
     })
   }
 

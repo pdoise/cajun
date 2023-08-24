@@ -37,7 +37,7 @@
             <p>Search Recipes</p>
           </a>
         </li>
-        <ng-container>
+        <ng-container *ngIf="auth.isAuthenticated()">
           <li class="nav-item">
             <a [routerLink]="['/cookbook/' + auth.getCurrentUser()?.id]"
               class="nav-link">

@@ -57,7 +57,7 @@ import { CustomHttpInterceptor } from './core/http.interceptor';
   providers: [{
     provide: 'SocialAuthServiceConfig',
       useValue: {
-        autoLogin: false,
+        autoLogin: true,
         providers: [{
           id: FacebookLoginProvider.PROVIDER_ID,
           provider: new FacebookLoginProvider('765683692014853')

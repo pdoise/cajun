@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   logout() {
-    window.FB.logout();
+    //window.FB.logout();
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
     this.router.navigate(['/landing']);
