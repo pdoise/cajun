@@ -44,3 +44,8 @@ export const selectFilteredRecipes = createSelector(
     return filtered;
   }
 );
+
+export const selectRecipeComments = createSelector(
+  appSelector,
+  (state) => { return state.recipe.comments }
+);

@@ -7,8 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-import { FacebookLoginProvider } from '@abacritt/angularx-social-login';
+//import { FacebookLoginProvider, SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -50,23 +49,24 @@ import { CustomHttpInterceptor } from './core/http.interceptor';
     NgbModule,
     SharedModule,
     HttpClientModule,
-    SocialLoginModule,
+    //SocialLoginModule,
     StoreModule.forRoot({app: appReducer}),
     EffectsModule.forRoot([AppEffects])
   ],
-  providers: [{
-    provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: true,
-        providers: [{
-          id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider('765683692014853')
-        }],
-        onError: (err) => {
-          console.error(err);
-        }
-      } as SocialAuthServiceConfig,
-    },
+  providers: [
+    //{
+    //provide: 'SocialAuthServiceConfig',
+    //  useValue: {
+    //    autoLogin: false,
+    //    providers: [{
+    //      id: FacebookLoginProvider.PROVIDER_ID,
+    //      provider: new FacebookLoginProvider('765683692014853')
+    //    }],
+    //    onError: (err) => {
+    //      console.error(err);
+    //    }
+    //  } as SocialAuthServiceConfig,
+    //},
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }
   ],

@@ -24,10 +24,10 @@ export class PaginationComponent implements OnInit, DoCheck, OnDestroy {
 
   ngOnInit() {
     this.recordsSub = this.records.subscribe((records: any) => {
-      this.total = records.length;
+      this.total = records?.length;
     })
     this.recordsSub.add(this.filteredRecords.subscribe((records: any) => {
-      this.collectionSize = records.length;
+      this.collectionSize = records?.length;
     }))
   }
 

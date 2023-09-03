@@ -7,13 +7,14 @@
         <h3>Discover the Finest Recipes from Louisiana - Cajun, Creole, and Southern Cuisine</h3>
         <br />
         <button type="button"
-          class="btn btn-outline-neutral btn-round">
+          class="btn btn-outline-neutral btn-round"
+          [routerLink]="['/recipes']">
           Search Recipes
         </button>
         <button *ngIf="!auth.isAuthenticated()"
           type="button"
           class="btn btn-outline-neutral btn-round"
-          [routerLink]="['/login']">
+          [routerLink]="['/signup']">
           Create Your Cookbook
         </button>
       </div>

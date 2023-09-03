@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 
 import { AuthService } from 'src/app/auth/auth.service';
 import { RecipeActions } from '../../../state/app.actions';
-import { selectRecipe } from '../../../state/app.selector';
+import { selectRecipe, selectRecipeComments } from '../../../state/app.selector';
 import { Recipe, User, Comment } from 'src/app/app.models';
 
 import { environment } from 'src/environments/environment';
@@ -20,6 +20,7 @@ import { environment } from 'src/environments/environment';
 
 export class RecipeShowComponent implements OnInit {
   recipe$: Observable<Recipe> = this.store.select(selectRecipe);
+  comments$: Observable<Comment[]> = this.store.select(selectRecipeComments);
   userId: number = this.route.snapshot.params['userId'];
   recipeId: number = this.route.snapshot.params['recipeId'];
   form!: FormGroup;
