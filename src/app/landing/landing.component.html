@@ -4,7 +4,7 @@
     <div class="container">
       <div class="motto text-center">
         <h1>Cajun Cookbook</h1>
-        <h3>Discover the Finest Recipes from Louisiana - Cajun, Creole, and Southern Cuisine</h3>
+        <h3>Discover the Best Recipes from Louisiana - Cajun, Creole, and Southern Cuisine</h3>
         <br />
         <button type="button"
           class="btn btn-outline-neutral btn-round"
@@ -50,12 +50,12 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-12">
-            <h2 class="title">Your Personal Recipe Book</h2>
+            <h2 class="title">Your Virtual Recipe Book</h2>
             <h5 class="description">
-              Welcome to Cajun Cookbook, the perfect place to share and discover new recipes. Create your very own recipe book, with the ability to rate and comment on other users' recipes. Whether you're looking for a classic jambalaya or a unique seafood gumbo, our community of passionate Cajuns has got you covered. Join us today and let's cook up some Cajun magic together!
+              Welcome to Cajun Cookbook, the perfect place to store you family recipes, share them with others, and discover new recipes. Easily pull up recipes on your phone or laptop while cooking, create your own cookbook, like and comment on other people's recipes. Whether you're looking for a classic jambalaya or a unique seafood gumbo, you will find it here. Let's cook up some magic together!
             </h5>
             <br>
-            <button *ngIf="!auth.isAuthenticated()" class="btn btn-primary btn-round">Get started</button>
+            <button *ngIf="!auth.isAuthenticated()" class="btn btn-primary btn-round" [routerLink]="['/signup']">Get started</button>
           </div>
         </div>
         <br/><br/>
@@ -65,7 +65,7 @@
               <div class="description">
                 <h4 class="info-title">Build Your Own Cookbook</h4>
                 <p class="description">Create and customize your own cookbook filled with your favorite recipes. Save, organize, and access your recipes anytime, anywhere.</p>
-                <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger">Get started</a>
+                <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger" [routerLink]="['/signup']">Get started</a>
               </div>
             </div>
           </div>
@@ -73,17 +73,17 @@
             <div class="info">
               <div class="description">
                 <h4 class="info-title">Share Your Recipes</h4>
-                <p> Share your recipes with a community of fellow cajun food enthusiasts. Get feedback, comments, and ratings on your recipes from other users. Discover new recipes and tips from other cajun cooks.</p>
-                <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger">Get started</a>
+                <p> Share your recipes with friends and family. Get feedback, comments, and ratings on your recipes from others. Discover new recipes and tips from other cooks.</p>
+                <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger" [routerLink]="['/signup']">Get started</a>
               </div>
             </div>
               </div>
               <div class="col-md-3">
                 <div class="info">
                   <div class="description">
-                    <h4 class="info-title">Discover Authentic Cajun Flavors</h4>
-                    <p>Explore a collection of authentic cajun recipes, from classic dishes to new and innovative creations. Filter and search recipes by ingredients, cuisine type, and dietary restrictions to find the perfect recipe for your taste.</p>
-                    <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger">Get started</a>
+                    <h4 class="info-title">Discover Authentic Southern Flavors</h4>
+                    <p>Explore a collection of authentic cajun recipes, from classic dishes to new and innovative creations.</p>
+                    <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger" [routerLink]="['/signup']">Get started</a>
                   </div>
                 </div>
               </div>
@@ -92,7 +92,7 @@
                   <div class="description">
                     <h4 class="info-title">Connect with Others</h4>
                     <p>Join a community of cajun food lovers who share the same passion for this delicious cuisine. Get inspired, share stories, and make new friends who share your love for cajun cooking.</p>
-                    <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger">Get started</a>
+                    <a *ngIf="!auth.isAuthenticated()" class="btn btn-link btn-danger" [routerLink]="['/signup']">Get started</a>
                   </div>
                 </div>
               </div>

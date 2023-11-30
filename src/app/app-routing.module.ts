@@ -14,8 +14,7 @@ import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [{
   path: 'cookbook/:userId',
-  component: CookBookComponent,
-  canActivate: [AuthGuard]
+  component: CookBookComponent
 },{
   path: 'landing',
   component: LandingComponent,
